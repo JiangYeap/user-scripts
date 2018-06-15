@@ -9,14 +9,12 @@ function injectJS(stmts) {
   let scriptElem = document.createElement('script');
   let scriptText = '';
 
-  for (int i = 0; i < stmts.length; i += 1) {
+  for (let i = 0; i < stmts.length; i += 1) {
     let stmt  = stmts[i];
 
     if (typeof stmt[0] === 'string') scriptText += stmt[0];
-    else if (typeof stmt[0] === 'function' && stmt[1] === FN_DEF)
-      scriptText += stmt[0];
-    else if (typeof stmt[0] === 'function' && stmt[1] === FN_EXEC)
-      scriptText += '(' + stmt[0] + ')' + '();';
+    else if (typeof stmt[0] === 'function' && stmt[1] === FN_DEF) scriptText += stmt[0];
+    else if (typeof stmt[0] === 'function' && stmt[1] === FN_EXEC) scriptText += '(' + stmt[0] + ')' + '();';
     else throw 'Invalid script: ' + stmt[0];
 
     scriptText += '\n';
