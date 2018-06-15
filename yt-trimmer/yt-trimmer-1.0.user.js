@@ -43,7 +43,8 @@ function setUI() {
     <input id="start-time" type="number" style="width:3em" required="requried" />
     <label for="end-time" style="margin-left:0.9em">End: </label><input id="end-time" type="number" style="width:3em" required="required" />
     <button type="submit" style="margin-left:0.9em">Confirm</button>`;
-
+  form.style.visibility = 'hidden';
+	
   container.append(form);
 }
 
