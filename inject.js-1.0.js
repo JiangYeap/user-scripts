@@ -1,6 +1,6 @@
 // Argument toExec is the function to execute, toDefine is a mixed list of
 // statements.
-function inject(toExec, toDefine) {
+function injectJS(toExec, toDefine) {
   let scriptElem = document.createElement('script');
   let mainFn     = '(' + toExec + ')();';
   let defined    = '';
