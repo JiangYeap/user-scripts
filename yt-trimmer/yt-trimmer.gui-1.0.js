@@ -1,4 +1,4 @@
-const CSS = //
+const CSS_STR = //
   `
     #trim-box {
         float: right;
@@ -41,9 +41,9 @@ const CSS = //
   // Function which initialises UI for application.
   function setUI() {
     let container  = document.getElementById('yt-masthead-content');
-    let span 			 = document.createElement('span');
-    span.id        = 'trim-box';
-    span.innerHTML = //
+    let trimElem   = document.createElement('span');
+    trimElem.id        = 'trim-box';
+    trimElem.innerHTML = //
       `
         <span id="trim-status"></span>
         <form id="trim-form">
@@ -55,5 +55,5 @@ const CSS = //
         </form>
       `
 
-    container.append(span);
+    container.append(trimElem);
   }
