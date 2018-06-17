@@ -1,4 +1,4 @@
-const CSS_STR = //
+let CSS_STR = //
   `
     #trim-box {
         float: right;
@@ -38,22 +38,28 @@ const CSS_STR = //
 
   `
 
-  // Function which initialises UI for application.
-  function setUi() {
-    let container  = document.getElementById('yt-masthead-content');
-    let trimElem   = document.createElement('span');
-    trimElem.id        = 'trim-box';
-    trimElem.innerHTML = //
-      `
-        <span id="trim-status"></span>
-        <form id="trim-form">
-            <label for="start-time" class="trim-label">Start: </label>
-            <input id="start-time" class="trim-input" type="number" />
-            <label for="end-time" class="trim-label">End: </label>
-  					<input id="end-time" class="trim-input" type="number" />
-            <button type="submit">Confirm</button>
-        </form>
-      `
-
-    container.append(trimElem);
+// Function which initialises UI for application.
+function setUi() {
+  let ytVersion      = 0;
+  let trimElem       = document.createElement('span');
+  let container      = document.getElementById('yt-masthead-content');
+  if (!container) {
+    container = document.getElementsByTagName('ytd-searchbox')[0];
+    ytVersion = 1;
   }
+
+  trimElem.id        = 'trim-box';
+  trimElem.innerHTML = //
+    `
+      <span id="trim-status"></span>
+      <form id="trim-form">
+          <label for="start-time" class="trim-label">Start: </label>
+          <input id="start-time" class="trim-input" type="number" />
+          <label for="end-time" class="trim-label">End: </label>
+					<input id="end-time" class="trim-input" type="number" />
+          <button type="submit">Confirm</button>
+      </form>
+    `
+
+  container.append(trimElem);
+}

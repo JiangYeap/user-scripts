@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Youtube Video Trimmer
+// @name           Youtube Test
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time hits end mark.
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/9ebfd076/utils/inject.script-1.1.js
@@ -11,7 +11,7 @@
 
 // Function which handles submission of trim-form.
 function updateDict(event) {
-	event.preventDefault();
+  event.preventDefault();
   let strt  = parseInt(document.getElementById('start-time').value);
   let end   = parseInt(document.getElementById('end-time').value);
   let id    = getUrlParameter('v');
@@ -32,13 +32,13 @@ function updateDict(event) {
 // Main function with intervals.
 function trim() {
   function updateUi(id) {
-		let trimElem   = document.getElementById('trim-box');
-		let trimStatus = document.getElementById('trim-status');
+	let trimElem   = document.getElementById('trim-box');
+	let trimStatus = document.getElementById('trim-status');
 
     if (!id)
-		  trimElem.style.visibility     = 'hidden';
+	  trimElem.style.visibility     = 'hidden';
     else {
-			trimElem.style.visibility     = 'visible';
+	  trimElem.style.visibility     = 'visible';
       if (DICT[id]) {
         let strt                    = document.getElementById('start-time');
         let end                     = document.getElementById('end-time');
@@ -61,7 +61,7 @@ function trim() {
     updateUi(id);
 
     if (DICT[id] && plyr) {
-	 	  let time = plyr.getCurrentTime();
+	  let time = plyr.getCurrentTime();
    	  let strt = DICT[id][0];
    	  let end  = DICT[id][1];
       if (Math.floor(time) < strt) plyr.seekTo(strt);
@@ -69,8 +69,8 @@ function trim() {
     }
   }
 
-	// Loops the step function twice per second.
-	setInterval(step, 500);
+  // Loops the step function twice per second.
+  setInterval(step, 500);
 }
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
