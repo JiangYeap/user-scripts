@@ -2,10 +2,10 @@
 // @name           Youtube Video Trimmer
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time hits end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/5807bac9/utils/inject.script-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/9ebfd076/utils/inject.script-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/5807bac9/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/urlparam-1.0.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/0d17e268/yt-trimmer/yt-trimmer.gui-1.0.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/9ebfd076/yt-trimmer/yt-trimmer.gui-1.0.js
 // @author         Jiang Yeap
 // ==/UserScript==
 
