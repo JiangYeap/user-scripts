@@ -5,8 +5,9 @@ const STR_INJ = -1;
 
 // Argument stmts is a list of [<Statement>, <Code>], to be declared/executed in that order.
 function injectJs(stmts) {
-  let scriptElem = document.createElement('script');
-  let scriptText = '';
+  let scriptElem  = document.createElement('script');
+  let scriptText  = '';
+  scriptElem.type = 'application/javascript';
 
   for (let i = 0; i < stmts.length; i += 1) {
     let stmt  = stmts[i];
@@ -17,7 +18,6 @@ function injectJs(stmts) {
     scriptText += '\n';
   }
 
-  scriptElem.type        = 'application/javascript';
   scriptElem.textContent = scriptText;
   document.head.appendChild(scriptElem);
   document.head.removeChild(scriptElem);
@@ -25,15 +25,15 @@ function injectJs(stmts) {
 
 // Argument attrs is a list of [<Attribute>, <Value>] to be added to script tag.
 function injectJsSrc(src, attrs) {
-  let scriptElem = document.createElement('script');
-  scriptElem.src = src;
+  let scriptElem  = document.createElement('script');
+  scriptElem.src  = src;
+  scriptElem.type = 'application/javascript';
 
   for (let i = 0; i < attrs.length; i += 1) {
     let attr = attrs[i];
     scriptElem.setAttribute(attr[0], attr[1]);
   }
 
-  scriptElem.type = 'application/javascript';
   document.head.appendChild(scriptElem);
   document.head.removeChild(scriptElem);
 }
