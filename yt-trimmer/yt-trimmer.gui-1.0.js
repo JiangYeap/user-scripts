@@ -39,7 +39,7 @@ const CSS_STR = //
   `
 
   // Function which initialises UI for application.
-  function setUI() {
+  function setUi() {
     let container  = document.getElementById('yt-masthead-content');
     let trimElem   = document.createElement('span');
     trimElem.id        = 'trim-box';

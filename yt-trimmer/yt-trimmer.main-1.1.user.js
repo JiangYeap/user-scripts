@@ -2,16 +2,16 @@
 // @name           Youtube Video Trimmer
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time hits end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/inject.script-1.1.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/inject.style-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/5807bac9/utils/inject.script-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/5807bac9/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/urlparam-1.0.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/0d17e268/yt-trimmer/yt-trimmer.gui-1.0.js
 // @author         Jiang Yeap
 // ==/UserScript==
 
-// Function which handles addition of new trim entries.
+// Function which handles submission of trim-form.
 function updateDict(event) {
 	event.preventDefault();
-
   let strt  = parseInt(document.getElementById('start-time').value);
   let end   = parseInt(document.getElementById('end-time').value);
   let id    = getUrlParameter('v');
@@ -22,7 +22,6 @@ function updateDict(event) {
     delete DICT[id];
     localStorage.setItem('dict', JSON.stringify(DICT));
   }
-
   else if (strt <= end && strt >= 0 && end >= 0) {
     console.log(title + ' - ' + id + ' will be trimmed to [' + strt + ', ' + end + ']');
     DICT[id] = [strt, end, title];
@@ -32,31 +31,34 @@ function updateDict(event) {
 
 // Main function with intervals.
 function trim() {
-  function updateFormUI(id) {
-    if (!id) document.getElementById('trim-box').style.visibility = 'hidden';
+  function updateUi(id) {
+		let trimElem   = document.getElementById('trim-box');
+		let trimStatus = document.getElementById('trim-status');
+
+    if (!id)
+		  trimElem.style.visibility     = 'hidden';
     else {
-      let status = document.getElementById('trim-status');
+			trimElem.style.visibility     = 'visible';
       if (DICT[id]) {
-        let strt                = document.getElementById('start-time');
-        let end                 = document.getElementById('end-time');
-        strt.placeholder        = DICT[id][0];
-        end.placeholder         = DICT[id][1];
-        status.style.background = '#59ABE3';
-        status.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
+        let strt                    = document.getElementById('start-time');
+        let end                     = document.getElementById('end-time');
+        strt.placeholder            = DICT[id][0];
+        end.placeholder             = DICT[id][1];
+        trimStatus.style.background = '#59ABE3';
+        trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
       }
       else {
-        status.style.background = '#888888';
-        status.title            = 'Video is not trimmed. Set start and end time to trim.';
+        trimStatus.style.background = '#888888';
+        trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
       }
-      document.getElementById('trim-box').style.visibility = 'visible';
     }
   }
 
-  function stepEvent() {
+  // Step function which performs checks on playing video.
+  function step() {
     let id   = getUrlParameter('v');
     let plyr = document.getElementById('movie_player');
-
-    updateFormUI(id);
+    updateUi(id);
 
     if (DICT[id] && plyr) {
 	 	  let time = plyr.getCurrentTime();
@@ -67,12 +69,13 @@ function trim() {
     }
   }
 
-	setInterval(stepEvent, 500);
+	// Loops the step function twice per second.
+	setInterval(step, 500);
 }
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.getElementById("trim-form").addEventListener("submit", ' + updateDict + ');';
-const STMTS_STR  = [[DICT_STR, STR], [setUI, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR], [trim, FN_EXEC]];
+const STMTS_STR  = [[DICT_STR, STR_INJ], [setUI, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR_INJ], [trim, FN_EXEC]];
 
 injectCss(CSS_STR);
 injectJs(STMTS_STR);
