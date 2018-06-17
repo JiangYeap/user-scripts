@@ -72,7 +72,7 @@ function trim() {
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.getElementById("trim-form").addEventListener("submit", ' + updateDict + ');';
-const STMTS_STR  = [[DICT_STR, STR], [setUI, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR], [trim, FN_EXEC]];
+const STMTS_STR  = [[DICT_STR, STR_INJ], [setUI, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR_INJ], [trim, FN_EXEC]];
 
 injectCss(CSS_STR);
 injectJs(STMTS_STR);

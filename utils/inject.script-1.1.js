@@ -1,7 +1,7 @@
-// Constants to indicate function declaration or execution. STR is ignored.
+// Constants to indicate function declaration or execution. STR_INJ is ignored.
 const FN_DEF  = 0;
 const FN_EXEC = 1;
-const STR     = -1;
+const STR_INJ = -1;
 
 // Argument stmts is a list of [<Statement>, <Code>], to be declared/executed in that order.
 function injectJs(stmts) {
