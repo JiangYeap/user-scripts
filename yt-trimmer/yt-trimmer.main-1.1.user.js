@@ -32,13 +32,13 @@ function updateDict(event) {
 // Main function with intervals.
 function trim() {
   function updateUi(id) {
-	let trimElem   = document.getElementById('trim-box');
-	let trimStatus = document.getElementById('trim-status');
+    let trimElem   = document.getElementById('trim-box');
+    let trimStatus = document.getElementById('trim-status');
 
     if (!id)
-	  trimElem.style.visibility     = 'hidden';
+      trimElem.style.visibility     = 'hidden';
     else {
-	  trimElem.style.visibility     = 'visible';
+      trimElem.style.visibility     = 'visible';
       if (DICT[id]) {
         let strt                    = document.getElementById('start-time');
         let end                     = document.getElementById('end-time');
@@ -61,11 +61,11 @@ function trim() {
     updateUi(id);
 
     if (DICT[id] && plyr) {
-	  let time = plyr.getCurrentTime();
-   	  let strt = DICT[id][0];
-   	  let end  = DICT[id][1];
+      let time = plyr.getCurrentTime();
+      let strt = DICT[id][0];
+      let end  = DICT[id][1];
       if (Math.floor(time) < strt) plyr.seekTo(strt);
-   	  if (Math.floor(time) >= end) plyr.seekTo(plyr.getDuration());
+      if (Math.floor(time) >= end) plyr.seekTo(plyr.getDuration());
     }
   }
 
