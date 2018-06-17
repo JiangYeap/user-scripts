@@ -3,7 +3,6 @@ function injectCss(str) {
   let styleElem = document.createElement('style');
   styleElem.innerHTML = str;
   document.head.appendChild(styleElem);
-  document.head.removeChild(styleElem);
 }
 
 // Argument attrs is a list of [<Attribute>, <Value>] to be added to style tag.
@@ -18,5 +17,4 @@ function injectCssSrc(src, attrs) {
 
   styleElem.type = 'text/css';
   document.head.appendChild(styleElem);
-  document.head.removeChild(styleElem);
 }
