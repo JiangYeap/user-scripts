@@ -9,6 +9,7 @@ function injectCss(str) {
 function injectCssSrc(src, attrs) {
   let styleElem  = document.createElement('link');
   styleElem.rel  = 'stylesheet';
+  styleElem.type = 'text/css'
   styleElem.href = src;
 
   for (let i = 0; i < attrs.length; i += 1) {
