@@ -2,13 +2,13 @@
 // @name           Youtube Video Trimmer
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time hits end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user_scripts/2456b5ab/utils/inject.script-1.1.js
-// @require        https://cdn.rawgit.com/JiangYeap/user_scripts/2456b5ab/utils/inject.style-1.1.js
-// @require        https://cdn.rawgit.com/JiangYeap/user_scripts/2456b5ab/utils/urlparam-1.0.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/inject.script-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/inject.style-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/urlparam-1.0.js
 // @author         Jiang Yeap
 // ==/UserScript==
 
-// Function which handles submit of new-trim.
+// Function which handles addition of new trim entries.
 function updateDict(event) {
 	event.preventDefault();
 
@@ -30,28 +30,10 @@ function updateDict(event) {
   }
 }
 
-// Function which initialises UI for application.
-function setUI() {
-  let container   = document.getElementById('yt-masthead-content');
-  let form        = document.createElement('form');
-
-  form.style      = 'float:right;height:23px;margin-top:-2em';
-  form.id         = 'new-trim';
-  form.innerHTML  = //
-   `<div id="trim-status" style="background:#888888;width:1em;height:1em;border-radius:50%;vertical-align:middle;display:inline-block"></div>
-    <label for="start-time" style="margin-left:1.2em">Start: </label>
-    <input id="start-time" type="number" style="width:3em" required="requried" />
-    <label for="end-time" style="margin-left:0.9em">End: </label><input id="end-time" type="number" style="width:3em" required="required" />
-    <button type="submit" style="margin-left:0.9em">Confirm</button>`;
-  form.style.visibility = 'hidden';
-	
-  container.append(form);
-}
-
 // Main function with intervals.
 function trim() {
   function updateFormUI(id) {
-    if (!id) document.getElementById('new-trim').style.visibility = 'hidden';
+    if (!id) document.getElementById('trim-box').style.visibility = 'hidden';
     else {
       let status = document.getElementById('trim-status');
       if (DICT[id]) {
@@ -66,7 +48,7 @@ function trim() {
         status.style.background = '#888888';
         status.title            = 'Video is not trimmed. Set start and end time to trim.';
       }
-      document.getElementById('new-trim').style.visibility = 'visible';
+      document.getElementById('trim-box').style.visibility = 'visible';
     }
   }
 
@@ -81,7 +63,7 @@ function trim() {
    	  let strt = DICT[id][0];
    	  let end  = DICT[id][1];
       if (Math.floor(time) < strt) plyr.seekTo(strt);
-   	  if (Math.floor(time) == end) plyr.seekTo(plyr.getDuration());
+   	  if (Math.floor(time) >= end) plyr.seekTo(plyr.getDuration());
     }
   }
 
@@ -89,7 +71,8 @@ function trim() {
 }
 
 let globalDict = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
-let listener   = 'document.getElementById("new-trim").addEventListener("submit", ' + updateDict + ');';
+let listener   = 'document.getElementById("trim-form").addEventListener("submit", ' + updateDict + ');';
 let statements = [[globalDict, STR], [setUI, FN_EXEC], [getUrlParameter, FN_DEF], [listener, STR], [trim, FN_EXEC]];
 
+injectCss(CSS);
 injectJs(statements);
