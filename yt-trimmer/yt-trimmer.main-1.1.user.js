@@ -6,6 +6,8 @@
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/5807bac9/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/fab94c8c/utils/urlparam-1.0.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/9ebfd076/yt-trimmer/yt-trimmer.gui-1.0.js
+// @grant          none
+// @run-at         document-start
 // @author         Jiang Yeap
 // ==/UserScript==
 
@@ -77,5 +79,8 @@ const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.getElementById("trim-form").addEventListener("submit", ' + updateDict + ');';
 const STMTS_STR  = [[DICT_STR, STR_INJ], [setUi, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR_INJ], [trim, FN_EXEC]];
 
-injectCss(CSS_STR);
-injectJs(STMTS_STR);
+// Injects script and style after everything loads.
+window.addEventListener("load", function(event) {
+  injectCss(CSS_STR);
+  injectJs(STMTS_STR);
+});

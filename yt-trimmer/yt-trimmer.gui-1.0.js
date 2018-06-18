@@ -43,6 +43,7 @@ function setUi() {
   let ytVersion      = 0;
   let trimElem       = document.createElement('span');
   let container      = document.getElementById('yt-masthead-content');
+  
   if (!container) {
     container = document.getElementsByTagName('ytd-searchbox')[0];
     ytVersion = 1;
