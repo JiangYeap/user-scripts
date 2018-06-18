@@ -2,11 +2,12 @@
 // @name           Youtube Test
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube vvidIdeo at start mark and skips to end of vvidIdeo when current time hits end mark.
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/yt-trimmer/yt-trimmer.gui-1.2.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.script-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/urlparam-1.0.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8e533dcc/yt-trimmer/yt-trimmer.gui-1.2.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8e533dcc/utils/elem-loaded.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/elem-loaded.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/time-to-sec.js
 // @grant          none
 // @run-at         document-start
 // @author         Jiang Yeap
@@ -60,7 +61,7 @@ const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateDict + ');';
 const UPDTUI_STR = 'setInterval(() => { updateUi(getUrlParameter("v")) }, 500)';
 
-const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [trim, FN_EXEC], [updateUi, FN_DEF]]
+const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [trim, FN_EXEC], [updateUi, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF]]
 const GUI_STMT  = [[UPDTUI_STR, STR_INJ], [LSTNRS_STR, STR_INJ]];
 
 // Injects main logic of script on load.
