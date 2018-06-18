@@ -61,7 +61,7 @@ const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateDict + ');';
 const UPDTUI_STR = 'setInterval(() => { updateUi(getUrlParameter("v")) }, 500)';
 
-const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [trim, FN_EXEC], [updateUi, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF]]
+const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [updateUi, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC]]
 const GUI_STMT  = [[UPDTUI_STR, STR_INJ], [LSTNRS_STR, STR_INJ]];
 
 // Injects main logic of script on load.

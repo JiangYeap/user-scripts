@@ -23,7 +23,11 @@ function secToTime(seconds) {
   let min  = 0 | seconds / 60;
   let sec  = 0 | seconds % 60;
 
-  if (hour) time = hour + ':' + min + ':' + sec;
+  if (sec.length < 2) sec = 0 + sec;
+  if (hour) {
+    time = hour + ':' + min + ':' + sec;
+    if (min.length < 2) min = 0 + min;
+  }
   else time = min + ':' + sec;
 
   return time;
