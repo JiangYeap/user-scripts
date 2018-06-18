@@ -7,7 +7,7 @@
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/urlparam-1.0.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/elem-loaded.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/time-to-sec.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/da2d623c/utils/time-sec-conv.js
 // @grant          none
 // @run-at         document-start
 // @author         Jiang Yeap
@@ -31,7 +31,7 @@ function updateDict(event) {
     localStorage.setItem('dict', JSON.stringify(DICT));
   }
   else if (startTime <= endTime && startTime >= 0 && endTime >= 0) {
-    console.log(vidTitle + ' <' + vidId + '> will be trimmed to [' + inputStart + ', ' + inputEnd + ']');
+    console.log(vidTitle + ' <' + vidId + '> will be trimmed to [' + secToTime(startTime) + ', ' + secToTime(endTime) + ']');
     DICT[vidId] = [startTime, endTime, vidTitle];
     localStorage.setItem('dict', JSON.stringify(DICT));
   }
@@ -64,8 +64,8 @@ const UPDTUI_STR = 'setInterval(() => { updateUi(getUrlParameter("v")) }, 500)';
 const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [updateUi, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC]]
 const GUI_STMT  = [[UPDTUI_STR, STR_INJ], [LSTNRS_STR, STR_INJ]];
 
-// Injects main logic of script on load.
-window.addEventListener('load', () => { injectJs(MAIN_STMT) });
+// Injects main logic of script immediately.
+injectJs(MAIN_STMT);
 
 // Injects GUI after header loads.
 onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope',

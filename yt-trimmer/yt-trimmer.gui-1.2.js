@@ -110,7 +110,7 @@ const CSS_NEW = //
         background: transparent;
         text-align: center;
         height: 100%;
-        width: 2.3em;
+        width: 3em;
     }
 
     .trim-button {

@@ -20,13 +20,15 @@ function timeToSec(time) {
 function secToTime(seconds) {
   let time = null;
   let hour = 0 | seconds / 3600;
+  seconds -= hour * 3600;
+  
   let min  = 0 | seconds / 60;
   let sec  = 0 | seconds % 60;
 
-  if (sec.length < 2) sec = 0 + sec;
+  if (String(sec).length < 2) sec = '0' + sec;
   if (hour) {
+    if (String(min).length < 2) min = '0' + min;
     time = hour + ':' + min + ':' + sec;
-    if (min.length < 2) min = 0 + min;
   }
   else time = min + ':' + sec;
 
