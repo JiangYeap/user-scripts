@@ -60,6 +60,22 @@ const CSS_OLD = //
         -moz-box-shadow:none;
         -webkit-box-shadow:none;
     }
+
+    ::-webkit-input-placeholder {
+        font-style: italic;
+    }
+
+    :-moz-placeholder {
+        font-style: italic;
+    }
+
+    ::-moz-placeholder {
+        font-style: italic;
+    }
+
+    :-ms-input-placeholder {
+        font-style: italic;
+    }
   `
 
 const CSS_NEW = //
@@ -127,6 +143,22 @@ const CSS_NEW = //
         -moz-box-shadow:none;
         -webkit-box-shadow:none;
     }
+
+    ::-webkit-input-placeholder {
+        font-style: italic;
+    }
+
+    :-moz-placeholder {
+        font-style: italic;
+    }
+
+    ::-moz-placeholder {
+        font-style: italic;
+    }
+
+    :-ms-input-placeholder {
+        font-style: italic;
+    }
   `
 
 let CSS_STR = CSS_OLD;
@@ -176,8 +208,8 @@ function updateUi(vidId) {
       trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
     }
     else {
-      inputStart.placeholder      = 'm:s';
-      inputEnd.placeholder        = 'm:s';
+      inputStart.placeholder      = 'mm:ss';
+      inputEnd.placeholder        = 'mm:ss';
       trimStatus.style.background = '#888888';
       trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
     }
