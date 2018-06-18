@@ -37,9 +37,8 @@ function updateDict(event) {
   }
 }
 
-// Main function with intervals.
+// Function which trims videos by performing checks on intervals.
 function trim() {
-  // Step function which performs checks on playing video.
   function step() {
     let vidId  = getUrlParameter('v');
     let player = document.querySelector('#movie_player');
@@ -53,7 +52,6 @@ function trim() {
     }
   }
 
-  // Loops the step function twice per second.
   setInterval(step, 250);
 }
 

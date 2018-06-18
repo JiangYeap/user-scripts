@@ -189,34 +189,33 @@ function setUi() {
   container.append(trimElem);
 }
 
-// Function which sets the UI based on currently playing video.
-function uiStep(vidId) {
-  let inputStart = document.querySelector('#trim-start');
-  let inputEnd   = document.querySelector('#trim-end');
-  let trimElem   = document.querySelector('#trim-box');
-  let trimStatus = document.querySelector('#trim-status');
+// Function which refreshes the UI on intervals based on current video.
+function updateUi() {
+  function uiStep(vidId) {
+    let inputStart = document.querySelector('#trim-start');
+    let inputEnd   = document.querySelector('#trim-end');
+    let trimElem   = document.querySelector('#trim-box');
+    let trimStatus = document.querySelector('#trim-status');
 
-  if (!vidId)
-  trimElem.style.visibility = 'hidden';
-  else {
-    trimElem.style.visibility = 'visible';
-
-    if (DICT[vidId]) {
-      inputStart.placeholder      = secToTime(DICT[vidId][0]);
-      inputEnd.placeholder        = secToTime(DICT[vidId][1]);
-      trimStatus.style.background = '#2ecc71';
-      trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
-    }
+    if (!vidId)
+    trimElem.style.visibility = 'hidden';
     else {
-      inputStart.placeholder      = 'mm:ss';
-      inputEnd.placeholder        = 'mm:ss';
-      trimStatus.style.background = '#888888';
-      trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
+      trimElem.style.visibility = 'visible';
+
+      if (DICT[vidId]) {
+        inputStart.placeholder      = secToTime(DICT[vidId][0]);
+        inputEnd.placeholder        = secToTime(DICT[vidId][1]);
+        trimStatus.style.background = '#2ecc71';
+        trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
+      }
+      else {
+        inputStart.placeholder      = 'mm:ss';
+        inputEnd.placeholder        = 'mm:ss';
+        trimStatus.style.background = '#888888';
+        trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
+      }
     }
   }
-}
 
-// Function which refreshes the UI on intervals.
-function updateUi() {
   setInterval(uiStep(getUrlParameter('v')), 250);
 }
