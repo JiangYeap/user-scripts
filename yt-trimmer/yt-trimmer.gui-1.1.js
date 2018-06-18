@@ -1,4 +1,4 @@
-let CSS_STR = //
+const CSS_OLD = //
   `
     #trim-box {
         float: right;
@@ -35,18 +35,57 @@ let CSS_STR = //
     .trim-input {
         width: 3em;
     }
-
   `
+
+const CSS_NEW = //
+  `
+    #trim-box {
+        float: right;
+        visibility: hidden;
+        width: auto;
+        height: 23px;
+        line-height: 23px;
+        margin-top: -27px;
+    }
+
+    #trim-box > * {
+        line-height: normal;
+        vertical-align: middle;
+    }
+
+    #trim-status {
+        display: inline-block;
+        background: #888888;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+    }
+
+    #trim-form {
+        display: inline-block;
+        width: auto;
+        height: 100%;
+    }
+
+    .trim-label {
+        margin-left: 0.9em;
+    }
+
+    .trim-input {
+        width: 3em;
+    }
+  `
+
+let CSS_STR = CSS_OLD;
 
 // Function which initialises UI for application.
 function setUi() {
-  let ytVersion      = 0;
-  let trimElem       = document.createElement('span');
-  let container      = document.getElementById('yt-masthead-content');
-  
+  let trimElem  = document.createElement('span');
+  let container = document.getElementById('yt-masthead-content');
+
   if (!container) {
     container = document.getElementsByTagName('ytd-searchbox')[0];
-    ytVersion = 1;
+    CSS_STR = CSS_NEW;
   }
 
   trimElem.id        = 'trim-box';

@@ -38,9 +38,10 @@ function trim() {
     let trimStatus = document.getElementById('trim-status');
 
     if (!id)
-      trimElem.style.visibility     = 'hidden';
+      trimElem.style.visibility = 'hidden';
     else {
-      trimElem.style.visibility     = 'visible';
+      trimElem.style.visibility = 'visible';
+
       if (DICT[id]) {
         let strt                    = document.getElementById('start-time');
         let end                     = document.getElementById('end-time');
@@ -50,6 +51,8 @@ function trim() {
         trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
       }
       else {
+        strt.placeholder            = null;
+        end.placeholder             = null;
         trimStatus.style.background = '#888888';
         trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
       }
@@ -77,10 +80,11 @@ function trim() {
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.getElementById("trim-form").addEventListener("submit", ' + updateDict + ');';
-const STMTS_STR  = [[DICT_STR, STR_INJ], [setUi, FN_EXEC], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR_INJ], [trim, FN_EXEC]];
+const STMTS_STR  = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [LSTNRS_STR, STR_INJ], [trim, FN_EXEC]];
 
 // Injects script and style after everything loads.
 window.addEventListener("load", function(event) {
+  setUi();
   injectCss(CSS_STR);
   injectJs(STMTS_STR);
 });
