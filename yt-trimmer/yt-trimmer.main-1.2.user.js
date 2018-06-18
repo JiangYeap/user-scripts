@@ -3,14 +3,13 @@
 // @version        1.2
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/1638fbec/yt-trimmer/yt-trimmer.gui-1.2.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/16e10a69/yt-trimmer/yt-trimmer.gui-1.2.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.script-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/urlparam-1.0.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/elem-loaded.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/1638fbec/utils/time-sec-conv.js
 // @grant          none
-// @run-at         document-start
 // @author         Jiang Yeap
 // ==/UserScript==
 

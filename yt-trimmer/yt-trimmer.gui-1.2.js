@@ -181,7 +181,7 @@ function setUi() {
           <label for="trim-start" class="trim-label">Start: </label>
           <input id="trim-start" class="trim-input" type="text" required="required" />
           <label for="trim-end" class="trim-label">End: </label>
-					<input id="trim-end" class="trim-input" type="text" required="required" />
+          <input id="trim-end" class="trim-input" type="text" required="required" />
           <button type="submit" class="trim-button">Confirm</button>
       </form>
     `
