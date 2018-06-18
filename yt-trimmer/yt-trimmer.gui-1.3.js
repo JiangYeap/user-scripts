@@ -189,15 +189,15 @@ function setUi() {
   container.append(trimElem);
 }
 
-// Function which refreshes the UI based on currently playing video.
-function updateUi(vidId) {
+// Function which sets the UI based on currently playing video.
+function uiStep(vidId) {
   let inputStart = document.querySelector('#trim-start');
   let inputEnd   = document.querySelector('#trim-end');
   let trimElem   = document.querySelector('#trim-box');
   let trimStatus = document.querySelector('#trim-status');
 
   if (!vidId)
-    trimElem.style.visibility = 'hidden';
+  trimElem.style.visibility = 'hidden';
   else {
     trimElem.style.visibility = 'visible';
 
@@ -214,4 +214,9 @@ function updateUi(vidId) {
       trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
     }
   }
+}
+
+// Function which refreshes the UI on intervals.
+function updateUi() {
+  setInterval(uiStep(getUrlParameter('v')), 250);
 }
