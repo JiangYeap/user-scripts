@@ -3,12 +3,12 @@
 // @version        1.2
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/16e10a69/yt-trimmer/yt-trimmer.gui-1.2.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.script-1.1.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/inject.style-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/be8c9955/yt-trimmer/yt-trimmer.gui-1.2.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/be8c9955/utils/inject.script-1.1.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/be8c9955/utils/inject.style-1.1.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/c9e725f7/utils/urlparam-1.0.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/6352b708/utils/elem-loaded.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/1638fbec/utils/time-sec-conv.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/be8c9955/utils/elem-loaded.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/be8c9955/utils/time-sec-conv.js
 // @grant          none
 // @author         Jiang Yeap
 // ==/UserScript==
@@ -54,12 +54,12 @@ function trim() {
   }
 
   // Loops the step function twice per second.
-  setInterval(step, 500);
+  setInterval(step, 250);
 }
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateDict + ');';
-const UPDTUI_STR = 'setInterval(() => { updateUi(getUrlParameter("v")) }, 500)';
+const UPDTUI_STR = 'setInterval(() => { updateUi(getUrlParameter("v")) }, 250)';
 
 const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [updateUi, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC]]
 const GUI_STMT  = [[UPDTUI_STR, STR_INJ], [LSTNRS_STR, STR_INJ]];
