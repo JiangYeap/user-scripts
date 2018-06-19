@@ -66,17 +66,6 @@ function trim() {
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
-const FORMAT_STR = //
-  `
-    if (!String.prototype.format) {
-      String.prototype.format = function() {
-        let args = arguments;
-        return this.replace(/{(\\d+)}/g, (match, number) => (
-          typeof args[number] != 'undefined' ? args[number] : match
-        ));
-      };
-    };
-  `
 
 const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC], [FORMAT_STR, STR_INJ], [updatePlayerUi, FN_EXEC]];
 const GUI_STMT  = [[LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
