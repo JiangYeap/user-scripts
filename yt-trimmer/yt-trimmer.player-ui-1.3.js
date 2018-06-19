@@ -33,7 +33,7 @@ let PLAYER_CSS = //
 
 function updatePlayerUi() {
   let barBg    = 'linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%)';
-  let playedBg = 'linear-gradient(to right, transparent {0}%, red {0}%)';
+  let playedBg = 'linear-gradient(to right, rgba(255, 0, 0, 0.25) {0}%, red {0}%, red {1}%, rgba(255, 0, 0, 0.25) {1}%)';
 
   function stepUi() {
     let player = document.querySelector('#movie_player');
@@ -53,10 +53,13 @@ function updatePlayerUi() {
       let barStart    = startTime / vidLength * 100;
       let barEnd      = endTime / vidLength * 100;
       let playedStart = startTime / currentTime * 100;
-      let playedEnd   = endTime / vidLength * 100;
+      let playedEnd   = 100;
+
+      if (currentTime >= endTime)
+        playedEnd = endTime / currentTime * 100;
 
       vidBar.style.background    = barBg.format(barStart, barEnd);
-      vidPlayed.style.background = playedBg.format(playedStart);
+      vidPlayed.style.background = playedBg.format(playedStart, playedEnd);
       vidLoaded.style.background = 'transparent';
     }
     else if (!DICT[vidId] && player) {
