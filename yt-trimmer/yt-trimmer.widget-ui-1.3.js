@@ -282,11 +282,13 @@ function updateWidgetUi() {
     let inputEnd   = document.querySelector('#trim-end');
     let trimElem   = document.querySelector('#trim-box');
     let trimStatus = document.querySelector('#trim-status');
+    let container  = document.querySelector('#yt-masthead-content');
+    let searchBar  = document.querySelector('#masthead-search');
 
-    if (!vidId)
-    trimElem.style.visibility = 'hidden';
+    if (!vidId) trimElem.style.visibility = 'hidden';
     else {
-      trimElem.style.visibility = 'visible';
+      if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) trimElem.style.visibility = 'hidden';
+      else trimElem.style.visibility = 'visible';
 
       if (DICT[vidId]) {
         inputStart.placeholder      = secToTime(DICT[vidId][0]);

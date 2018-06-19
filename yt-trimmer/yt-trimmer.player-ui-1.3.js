@@ -50,8 +50,8 @@ function updatePlayerUi() {
       let vidLoaded   = document.querySelector('.ytp-load-progress');
 
       let barLength   = vidBar.offsetWidth;
-      let barStart    = startTime / vidLength * 100;
-      let barEnd      = endTime / vidLength * 100;
+      let barStart    = (startTime + 0.5) / vidLength * 100;
+      let barEnd      = (endTime + 0.5) / vidLength * 100;
       let playedStart = startTime / currentTime * 100;
       let playedEnd   = 100;
 
@@ -73,5 +73,5 @@ function updatePlayerUi() {
     }
   }
 
-  setInterval(stepUi, 100);
+  setInterval(stepUi, 125);
 }
