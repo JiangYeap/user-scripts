@@ -76,7 +76,7 @@ const CSS_OLD = //
     :-ms-input-placeholder {
         font-style: italic;
     }
-  `
+  `;
 
 const CSS_NEW = //
   `
@@ -159,9 +159,93 @@ const CSS_NEW = //
     :-ms-input-placeholder {
         font-style: italic;
     }
-  `
+  `;
 
-let CSS_STR = '';
+let CSS_STR = //
+  `
+    [data-tooltip] {
+        position: relative;
+        cursor: pointer;
+    }
+
+    [data-tooltip]:before,
+    [data-tooltip]:after {
+        position: absolute;
+        visibility: hidden;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0;
+        -webkit-transition:
+            opacity 0.2s ease-in-out,
+              visibility 0.2s ease-in-out,
+              -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+          -moz-transition:
+              opacity 0.2s ease-in-out,
+              visibility 0.2s ease-in-out,
+              -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+          transition:
+              opacity 0.2s ease-in-out,
+              visibility 0.2s ease-in-out,
+              transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform:    translate3d(0, 0, 0);
+        transform:         translate3d(0, 0, 0);
+        pointer-events: none;
+    }
+
+    [data-tooltip]:before {
+        z-index: 1001;
+        border: 6px solid transparent;
+        background: transparent;
+        content: "";
+    }
+
+    [data-tooltip]:after {
+        z-index: 1000;
+        padding: 8px;
+        width: 160px;
+        background-color: #000;
+        background-color: hsla(0, 0%, 20%, 0.9);
+        color: #fff;
+        content: attr(data-tooltip);
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    [data-tooltip]:hover:before,
+    [data-tooltip]:hover:after,
+    [data-tooltip]:focus:before,
+    [data-tooltip]:focus:after {
+        visibility: visible;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        opacity: 1;
+    }
+
+    .tooltip-bottom:before,
+    .tooltip-bottom:after {
+        top: 100%;
+        bottom: auto;
+        left: 50%;
+    }
+
+    .tooltip-bottom:before {
+        margin-top: -12px;
+        margin-bottom: 0;
+        border-top-color: transparent;
+        border-bottom-color: #000;
+        border-bottom-color: hsla(0, 0%, 20%, 0.9);
+    }
+
+    .tooltip-bottom:hover:before,
+    .tooltip-bottom:hover:after,
+    .tooltip-bottom:focus:before,
+    .tooltip-bottom:focus:after {
+        -webkit-transform: translateY(12px);
+        -moz-transform:    translateY(12px);
+        transform:         translateY(12px);
+    }
+  `;
 
 // Function which initialises UI for application.
 function setUi() {
@@ -177,7 +261,7 @@ function setUi() {
   trimElem.id        = 'trim-box';
   trimElem.innerHTML = //
     `
-      <span id="trim-status"></span>
+      <span id="trim-status" class="tooltip-bottom"></span>
       <form id="trim-form">
           <label for="trim-start" class="trim-label">Start: </label>
           <input id="trim-start" class="trim-input" type="text" autocomplete="off" required="required" />
@@ -208,13 +292,13 @@ function updateUi() {
         inputStart.placeholder      = secToTime(DICT[vidId][0]);
         inputEnd.placeholder        = secToTime(DICT[vidId][1]);
         trimStatus.style.background = '#2ecc71';
-        trimStatus.title            = 'Video is trimmed. Set start and end to -1 to delete entry.';
+        trimStatus.setAttribute('data-tooltip', 'Video is trimmed. Set start and end to -1 to delete entry.');
       }
       else {
         inputStart.placeholder      = 'mm:ss';
         inputEnd.placeholder        = 'mm:ss';
         trimStatus.style.background = '#888888';
-        trimStatus.title            = 'Video is not trimmed. Set start and end time to trim.';
+        trimStatus.setAttribute('data-tooltip', 'Video is not trimmed. Set start and end time to trim.');
       }
     }
   }
