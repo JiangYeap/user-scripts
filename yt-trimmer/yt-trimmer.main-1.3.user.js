@@ -67,11 +67,11 @@ const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
 
 const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC]]
-const GUI_STMT  = [[LSTNRS_STR, STR_INJ], [updateUi, FN_EXEC]];
+const GUI_STMT  = [[LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
 
 // Injects main logic of script immediately.
 injectJs(MAIN_STMT);
 
 // Injects GUI after header loads.
 onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope',
-           () => { setUi(); injectCss(CSS_STR); injectJs(GUI_STMT) });
+           () => { setWidgetUi(); injectCss(CSS_STR); injectJs(GUI_STMT) });

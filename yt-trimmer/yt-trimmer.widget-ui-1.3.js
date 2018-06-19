@@ -248,7 +248,7 @@ let CSS_STR = //
   `;
 
 // Function which initialises UI for application.
-function setUi() {
+function setWidgetUi() {
   let trimElem  = document.createElement('span');
   let container = document.getElementById('yt-masthead-content');
 
@@ -275,7 +275,7 @@ function setUi() {
 }
 
 // Function which refreshes the UI on intervals based on current video.
-function updateUi() {
+function updateWidgetUi() {
   function uiStep() {
     let vidId      = getUrlParameter('v');
     let inputStart = document.querySelector('#trim-start');

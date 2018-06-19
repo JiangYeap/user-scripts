@@ -5,6 +5,10 @@ let PLAYER_CSS = //
         max-width: 886px;
     }
 
+    .ytp-load-progress {
+        background: linear-gradient(to right, transparent 0%, transparent 100px, grey 100px, grey 800px, transparent 800px, transparent 100%);
+    }
+
     .ytp-progress-list {
         height: 12px !important;
         background: linear-gradient(to right, transparent {barStart}%, white {barStart}%, white {barEnd}%, transparent {barEnd}%);
@@ -37,6 +41,7 @@ updatePlayerUi() {
 
       let vidBar      = document.querySelector('.ytp-progress-list');
       let vidPlayed   = document.querySelector('.ytp-play-progress');
+      let vidLoaded   = document.querySelector('.ytp-load-progress');
       let vidLength   = player.getDuration();
 
       let barLength   = vidBar.offsetWidth;
@@ -49,6 +54,7 @@ updatePlayerUi() {
       vidBar.style.background    = barBg.format(barStart, barEnd);
       vidPlayed.style.background = playedBg.format(playedStart);
       vidPlayed.style.maxWidth   = playedWidth;
+      vidLoaded.style.background = 'transparent';
     }
     else if (!DICT[vidId] && player) {
       let vidBar      = document.querySelector('.ytp-progress-list');
@@ -57,6 +63,7 @@ updatePlayerUi() {
       vidBar.style.background    = '';
       vidPlayed.style.background = '';
       vidPlayed.style.maxWidth   = '';
+      vidLoaded.style.background = '';
     }
   }
 
