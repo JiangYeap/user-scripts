@@ -161,7 +161,7 @@ const CSS_NEW = //
     }
   `
 
-let CSS_STR = CSS_OLD;
+let CSS_STR = '';
 
 // Function which initialises UI for application.
 function setUi() {
@@ -170,8 +170,9 @@ function setUi() {
 
   if (!container) {
     container = document.getElementsByTagName('ytd-searchbox')[0];
-    CSS_STR = CSS_NEW;
+    CSS_STR += CSS_NEW;
   }
+  else CSS_STR += CSS_OLD;
 
   trimElem.id        = 'trim-box';
   trimElem.innerHTML = //
@@ -191,7 +192,8 @@ function setUi() {
 
 // Function which refreshes the UI on intervals based on current video.
 function updateUi() {
-  function uiStep(vidId) {
+  function uiStep() {
+    let vidId      = getUrlParameter('v');
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
     let trimElem   = document.querySelector('#trim-box');
@@ -217,5 +219,5 @@ function updateUi() {
     }
   }
 
-  setInterval(uiStep(getUrlParameter('v')), 250);
+  setInterval(uiStep, 250);
 }

@@ -1,14 +1,17 @@
 // Function which converts time from string of <hh:mm:ss> format.
 function timeToSec(time) {
-  let seconds = null;
+  let seconds = NaN;
   let timeSeg = time.split(':').reverse();
+  let numSeg  = timeSeg.length;
 
-  for (let i = 0; i < timeSeg.length; i ++) {
+  if (numSeg > 3) return NaN;
+  for (let i = 0; i < numSeg; i ++) {
     let number = parseInt(timeSeg[i]);
 
-    if (number < 60) {
-      if (i === 0) seconds = number;
-      else if (i === 1) seconds += number * 60;
+    if (numSeg === 1) seconds = number;
+    else {
+      if (i === 0 && number < 60) seconds = number;
+      else if (i === 1 && number < 60) seconds += number * 60;
       else if (i === 2) seconds += number * 3600;
     }
   }
@@ -21,7 +24,7 @@ function secToTime(seconds) {
   let time = null;
   let hour = 0 | seconds / 3600;
   seconds -= hour * 3600;
-  
+
   let min  = 0 | seconds / 60;
   let sec  = 0 | seconds % 60;
 
