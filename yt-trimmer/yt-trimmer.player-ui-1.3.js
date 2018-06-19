@@ -33,7 +33,7 @@ let PLAYER_CSS = //
 
 function updatePlayerUi() {
   let barBg    = 'linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%)';
-  let playedBg = 'linear-gradient(to right, transparent {0}%, red {0}%, red {1}%, transparent {1}%)';
+  let playedBg = 'linear-gradient(to right, transparent {0}%, red {0}%)';
 
   function stepUi() {
     let player = document.querySelector('#movie_player');
