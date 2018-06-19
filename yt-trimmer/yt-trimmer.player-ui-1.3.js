@@ -1,17 +1,22 @@
 let PLAYER_CSS = //
   `
+    .ytp-progress-list {
+        height: 12px !important;
+        background: -moz-linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%);
+        background: -webkit-linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%);
+        background: linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%);
+        box-shadow: none;
+    }
+
     .ytp-play-progress {
-        background: linear-gradient(to right, transparent 0%, transparent 50.5px, red 50.5px);
-        max-width: 886px;
+        background: -moz-linear-gradient(to right, transparent {2}%, red {2}%, red {3}%, transparent 31}%);
+        background: -webkit-linear-gradient(to right, transparent {2}%, red {2}%, red {3}%, transparent {3}%);
+        background: linear-gradient(to right, transparent {2}%, red {2}%, red {3}%, transparent {3}%);
+        box-shadow: none;
     }
 
     .ytp-load-progress {
-        background: linear-gradient(to right, transparent 0%, transparent 100px, grey 100px, grey 800px, transparent 800px, transparent 100%);
-    }
-
-    .ytp-progress-list {
-        height: 12px !important;
-        background: linear-gradient(to right, transparent {barStart}%, white {barStart}%, white {barEnd}%, transparent {barEnd}%);
+        background: transparent;
         box-shadow: none;
     }
 
@@ -26,11 +31,11 @@ let PLAYER_CSS = //
     }
   `
 
-updatePlayerUi() {
+function updatePlayerUi() {
   let barBg    = 'linear-gradient(to right, transparent {0}%, white {0}%, white {1}%, transparent {1}%)';
-  let playedBg = 'linear-gradient(to right, transparent {0}%, red {0}%)';
+  let playedBg = 'linear-gradient(to right, transparent {0}%, red {0}%, red {1}%, transparent {1}%)';
 
-  stepUi() {
+  function stepUi() {
     let player = document.querySelector('#movie_player');
     let vidId  = getUrlParameter('v');
 
@@ -38,34 +43,32 @@ updatePlayerUi() {
       let currentTime = player.getCurrentTime();
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
+      let vidLength   = player.getDuration();
 
       let vidBar      = document.querySelector('.ytp-progress-list');
       let vidPlayed   = document.querySelector('.ytp-play-progress');
       let vidLoaded   = document.querySelector('.ytp-load-progress');
-      let vidLength   = player.getDuration();
 
       let barLength   = vidBar.offsetWidth;
       let barStart    = startTime / vidLength * 100;
       let barEnd      = endTime / vidLength * 100;
-
       let playedStart = startTime / currentTime * 100;
-      let playedWidth = (endTime - startTime) / vidLength * barLength + 'px';
+      let playedEnd   = endTime / vidLength * 100;
 
       vidBar.style.background    = barBg.format(barStart, barEnd);
       vidPlayed.style.background = playedBg.format(playedStart);
-      vidPlayed.style.maxWidth   = playedWidth;
       vidLoaded.style.background = 'transparent';
     }
     else if (!DICT[vidId] && player) {
       let vidBar      = document.querySelector('.ytp-progress-list');
       let vidPlayed   = document.querySelector('.ytp-play-progress');
+      let vidLoaded   = document.querySelector('.ytp-load-progress');
 
       vidBar.style.background    = '';
       vidPlayed.style.background = '';
-      vidPlayed.style.maxWidth   = '';
       vidLoaded.style.background = '';
     }
   }
 
-  setInterval(stepUi, 250);
+  setInterval(stepUi, 100);
 }

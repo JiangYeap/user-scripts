@@ -3,12 +3,13 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/yt-trimmer/yt-trimmer.gui-1.2.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/02ce2126/yt-trimmer/yt-trimmer.widget-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/02ce2126/yt-trimmer/yt-trimmer.player-ui-1.3.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/utils/inject-script.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/utils/inject-style.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/utils/url-param.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/utils/elem-loaded.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/3ecc6093/utils/time-conversion.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/02ce2126/utils/time-conversion.js
 // @grant          none
 // @author         Jiang Yeap
 // ==/UserScript==
@@ -65,8 +66,19 @@ function trim() {
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
 const LSTNRS_STR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
+const FORMAT_STR = //
+  `
+    if (!String.prototype.format) {
+      String.prototype.format = function() {
+        let args = arguments;
+        return this.replace(/{(\\d+)}/g, (match, number) => (
+          typeof args[number] != 'undefined' ? args[number] : match
+        ));
+      };
+    };
+  `
 
-const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC]]
+const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC], [FORMAT_STR, STR_INJ], [updatePlayerUi, FN_EXEC]];
 const GUI_STMT  = [[LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
 
 // Injects main logic of script immediately.
