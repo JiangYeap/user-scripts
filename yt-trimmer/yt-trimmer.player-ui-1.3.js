@@ -51,7 +51,7 @@ function updatePlayerUi() {
 
       let barLength   = vidBar.offsetWidth;
       let barStart    = (startTime + 0.5) / vidLength * 100;
-      let barEnd      = (endTime + 0.5) / vidLength * 100;
+      let barEnd      = (endTime - 0.5) / vidLength * 100;
       let playedStart = startTime / currentTime * 100;
       let playedEnd   = 100;
 
