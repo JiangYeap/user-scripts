@@ -167,28 +167,29 @@ let CSS_STR = //
         box-shadow: none;
     }
 
-    .show {
-        opacity: 0.8;
-        transition: opacity 400ms ease-in-out;
+    .show-status {
+        opacity: 0.85 !important;
     }
 
-    .hide {
-        opacity: 0;
-        transition: opacity 400ms ease-in-out
+    .show-notification {
+        opacity: 0.85 !important;
     }
 
     #trim-box {
+        opacity: 0;
+        transition: opacity 400ms ease-in-out;
         position: absolute;
         top: 55px;
         margin-left: 12px;
+        padding: 1em;
         width: 100%;
         height: auto;
         max-width: 223px;
-        padding: 1em;
+        background: rgba(42,45,50,0.85);
         line-height: 1.4;
         font-size: 90%;
+        text-align: center;
         color: #ffffff;
-        background: rgba(42,45,50,0.85);
     }
   `;
 
@@ -206,7 +207,7 @@ function setWidgetUi() {
   trimElem.id        = 'trim-widget';
   trimElem.innerHTML = //
     `
-      <span id="trim-status" class="tooltip-bottom"></span>
+      <a id="trim-status" class="tooltip-bottom"></a>
       <form id="trim-form">
           <label for="trim-start" class="trim-label">Start: </label>
           <input id="trim-start" class="trim-input" type="text" autocomplete="off" required="required" />
@@ -214,10 +215,29 @@ function setWidgetUi() {
           <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
           <button type="submit" class="trim-button">Confirm</button>
       </form>
-      <div id="trim-box" class="show">Video is trimmed set start and end to -1 to remove entry. Hover over circle for more info.</div>
+      <div id="trim-box"></div>
     `
-
   container.append(trimElem);
+}
+
+// Function which initialises hover listener for trim-status.
+function initStatusListener() {
+  let statusElem = document.querySelector('#trim-status');
+  let boxElem    = document.querySelector('#trim-box');
+
+  statusElem.onmouseover = () => {
+    let vidId      = getUrlParameter('v');
+    let statusText = '';
+
+    if (DICT[vidId]) statusText = 'Video is trimmed. Set start and end to -1 to delete entry.';
+    else statusText = 'Video is not trimmed. Set start and end time to trim.';
+
+    boxElem.textContent      = statusText;
+    boxElem.style.background = 'rgba(42,45,50,0.85)';
+    boxElem.classList.add('show-status');
+  };
+
+  statusElem.onmouseout  = () => { boxElem.classList.remove('show-status') };
 }
 
 // Function which refreshes the UI on intervals based on current video.
