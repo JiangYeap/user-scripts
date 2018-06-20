@@ -32,7 +32,7 @@ const CSS_OLD = //
     }
 
     #trim-box > i {
-        font-size: 1em;
+        font-size: 100%;
         line-height: normal;
         vertical-align:middle;
     }
@@ -181,8 +181,8 @@ function initStatusListener() {
     let vidId   = getUrlParameter('v');
     let boxHtml = 'Oops, something went wrong!';
 
-    if (DICT[vidId]) boxHtml = '<i class="material-icons">info</i>&emsp;Video is trimmed. Set start and end to -1 to delete entry.';
-    else boxHtml = '<i class="material-icons">info</i>&emsp;Video is not trimmed. Set start and end time to trim.';
+    if (DICT[vidId]) boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
+    else boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is not trimmed. Set start and end time to trim.';
 
     boxElem.style.background = 'rgba(42, 45, 50, 0.85)';
     boxElem.innerHTML        = boxHtml
