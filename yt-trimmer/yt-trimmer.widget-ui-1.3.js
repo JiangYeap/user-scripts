@@ -24,7 +24,7 @@ const CSS_OLD = //
         width: 100%;
         height: auto;
         max-width: 180px;
-        background: rgba(42,45,50,0.85);
+        background: rgba(42, 45, 50, 0.85);
         line-height: 1.4;
         font-size: 90%;
         text-align: center;
@@ -121,11 +121,11 @@ let CSS_STR = //
     }
 
     .show-status {
-        opacity: 0.85 !important;
+        opacity: 1 !important;
     }
 
     .show-notification {
-        opacity: 0.85 !important;
+        opacity: 1 !important;
     }
 
     ::-webkit-input-placeholder {
@@ -178,14 +178,14 @@ function initStatusListener() {
   let boxElem    = document.querySelector('#trim-box');
 
   statusElem.onmouseover = () => {
-    let vidId      = getUrlParameter('v');
-    let statusText = '';
+    let vidId   = getUrlParameter('v');
+    let boxHtml = 'Oops, something went wrong!';
 
-    if (DICT[vidId]) statusText = 'Video is trimmed. Set start and end to -1 to delete entry.';
-    else statusText = 'Video is not trimmed. Set start and end time to trim.';
+    if (DICT[vidId]) boxHtml = '<i class="material-icons">info</i>&emsp;Video is trimmed. Set start and end to -1 to delete entry.';
+    else boxHtml = '<i class="material-icons">info</i>&emsp;Video is not trimmed. Set start and end time to trim.';
 
-    boxElem.style.background = 'rgba(42,45,50,0.85)';
-    boxElem.innerHTML      = '<i class="material-icons">done</i>&emsp;Trim successfully saved!';
+    boxElem.style.background = 'rgba(42, 45, 50, 0.85)';
+    boxElem.innerHTML        = boxHtml
     boxElem.classList.add('show-status');
   };
 

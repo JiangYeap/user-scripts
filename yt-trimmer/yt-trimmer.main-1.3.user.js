@@ -3,10 +3,10 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/yt-trimmer/yt-trimmer.widget-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/yt-trimmer/yt-trimmer.player-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/inject-script.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/inject-style.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/cdf0edd0/yt-trimmer/yt-trimmer.widget-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/cdf0edd0/yt-trimmer/yt-trimmer.player-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/cdf0edd0/utils/inject-script.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/cdf0edd0/utils/inject-style.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/url-param.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/elem-loaded.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/time-conversion.js
@@ -18,12 +18,28 @@
 // Function which handles submission of trim-form.
 function updateEntry(event) {
   function showNotification(code) {
-    let boxElem  = document.querySelector('#trim-box');
-    let notiText = '';
+    let boxElem = document.querySelector('#trim-box');
+    let boxBgrd = 'transparent';
+    let boxHtml = 'Oops, something went wrong!';
 
-    if (code === 0) boxElem.innerHTML = '<i class="material-icons">done</i>&emsp;Trim successfully saved!';
-    else if (code === 1) notiText = '<i class="material-icons">delete</i>&emsp;Trim Successfully deleted!';
-    else if (code === 2) notiText = '<i class="material-icons">report_problem</i>&emsp;Invalid input, please try again.';
+    if (code === 0) {
+      boxBgrd = 'rgba(46, 213, 115, 0.85)';
+      boxHtml = '<i class="material-icons">done</i>&emsp;Trim successfully saved!';
+    }
+    else if (code === 1) {
+      boxBgrd = 'rgba(214, 48, 49, 0.85)';
+      boxHtml = '<i class="material-icons">delete</i>&emsp;Trim Successfully deleted!';
+    }
+    else if (code === 2) {
+      boxBgrd = 'rgba(253, 203, 110, 0.85)';
+      boxHtml = '<i class="material-icons">report_problem</i>&emsp;Invalid input, please try again.';
+    }
+
+    boxElem.style.background = boxBgrd;
+    boxElem.innerHTML        = boxHtml
+    boxElem.classList.add('show-notification');
+
+    setTimeout(() => { boxElem.classList.remove('show-notification') }, 2500);
   }
 
   event.preventDefault();
@@ -44,15 +60,16 @@ function updateEntry(event) {
   if (endTime > player.getDuration()) endTime = player.getDuration();
 
   if (startTime == -1 && endTime == -1) {
-    console.log(vidTitle + ' <' + vidId + '> is no longer trimmed.');
+    showNotification(1);
     delete DICT[vidId];
     localStorage.setItem('dict', JSON.stringify(DICT));
   }
   else if (startTime >= 0 && startTime <= endTime) {
-    console.log(vidTitle + ' <' + vidId + '> will be trimmed to [' + secToTime(startTime) + ', ' + secToTime(endTime) + ']');
+    showNotification(0);
     DICT[vidId] = [startTime, endTime, vidTitle];
     localStorage.setItem('dict', JSON.stringify(DICT));
   }
+  else showNotification(2);
 }
 
 // Function which trims videos by performing checks on intervals.
