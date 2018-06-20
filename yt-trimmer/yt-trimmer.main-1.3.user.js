@@ -3,14 +3,14 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts Youtube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/a43ef02e/yt-trimmer/yt-trimmer.widget-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/25a055e0/yt-trimmer/yt-trimmer.player-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/25a055e0/utils/inject-script.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/25a055e0/utils/inject-style.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/url-param.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/elem-loaded.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/time-conversion.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/949a02fb/utils/string-format.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/yt-trimmer/yt-trimmer.player-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/yt-trimmer/yt-trimmer.widget-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/elem-loaded.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/inject-script.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/inject-style.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/string-format.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/time-conversion.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/url-param.js
 // @grant          none
 // @author         Jiang Yeap
 // ==/UserScript==
