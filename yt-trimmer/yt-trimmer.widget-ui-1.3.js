@@ -76,6 +76,7 @@ let CSS_STR = //
     }
 
     #trim-box {
+        pointer-events: none;
         opacity: 0;
         transition: opacity 400ms ease-in-out;
         position: absolute;
@@ -133,10 +134,12 @@ let CSS_STR = //
     }
 
     .show-status {
+        pointer-events: auto !important;
         opacity: 1 !important;
     }
 
     .show-notification {
+        pointer-events: auto !important;
         opacity: 1 !important;
     }
 
