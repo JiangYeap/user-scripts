@@ -1,17 +1,17 @@
 const CSS_OLD = //
   `
     #trim-widget {
-      float: right;
-      visibility: hidden;
-      width: auto;
-      height: 23px;
-      line-height: 23px;
-      margin-top: -27px;
+        float: right;
+        visibility: hidden;
+        width: auto;
+        height: 23px;
+        line-height: 23px;
+        margin-top: -27px;
     }
 
     #trim-status {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
 
     #trim-box {
@@ -54,10 +54,6 @@ const CSS_NEW = //
         font-size: 1.3em;
         font-style: italic;
     }
-
-    #trim-widget > button {
-        cursor: pointer;
-    }
   `;
 
 let CSS_STR = //
@@ -99,25 +95,25 @@ let CSS_STR = //
     }
 
     .trim-label {
-      margin-left: 0.9em;
+        margin-left: 0.9em;
     }
 
     .trim-input {
-      box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      outline: none;
-      padding: 0px;
-      border: none;
-      border-bottom: 1px solid #ddd;
-      background: transparent;
-      text-align: center;
-      height: 100%;
-      width: 3em;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        padding: 0px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        background: transparent;
+        text-align: center;
+        height: 100%;
+        width: 3em;
     }
 
     .trim-input:not(:focus):invalid {
-      box-shadow: none;
+        box-shadow: none;
     }
 
     #trim-button {
