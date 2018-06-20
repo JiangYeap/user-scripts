@@ -23,7 +23,7 @@ const CSS_OLD = //
         padding: 1em;
         width: 100%;
         height: auto;
-        max-width: 180px;
+        max-width: 223px;
         background: rgba(42, 45, 50, 0.85);
         line-height: 1.4;
         font-size: 90%;
