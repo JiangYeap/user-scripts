@@ -1,5 +1,19 @@
 const CSS_OLD = //
   `
+    #trim-widget {
+      float: right;
+      visibility: hidden;
+      width: auto;
+      height: 23px;
+      line-height: 23px;
+      margin-top: -27px;
+    }
+
+    #trim-status {
+      width: 1em;
+      height: 1em;
+    }
+
     #trim-box {
         opacity: 0;
         transition: opacity 400ms ease-in-out;
@@ -17,18 +31,10 @@ const CSS_OLD = //
         color: #ffffff;
     }
 
-    #trim-widget {
-        float: right;
-        visibility: hidden;
-        width: auto;
-        height: 23px;
-        line-height: 23px;
-        margin-top: -27px;
-    }
-
-    #trim-status {
-        width: 1em;
-        height: 1em;
+    #trim-box > i {
+        font-size: 1em;
+        line-height: normal;
+        vertical-align:middle;
     }
   `;
 
@@ -179,7 +185,7 @@ function initStatusListener() {
     else statusText = 'Video is not trimmed. Set start and end time to trim.';
 
     boxElem.style.background = 'rgba(42,45,50,0.85)';
-    boxElem.textContent      = statusText;
+    boxElem.innerHTML      = '<i class="material-icons">done</i>&emsp;Trim successfully saved!';
     boxElem.classList.add('show-status');
   };
 

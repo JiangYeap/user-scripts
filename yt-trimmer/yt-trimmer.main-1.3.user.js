@@ -21,9 +21,9 @@ function updateEntry(event) {
     let boxElem  = document.querySelector('#trim-box');
     let notiText = '';
 
-    if (code === 0) boxElem.innerHTML = 'Trim successfully saved!';
-    else if (code === 1) notiText = 'Trim Successfully deleted!';
-    else if (code === 2) notiText = 'Invalid input, please try again.';
+    if (code === 0) boxElem.innerHTML = '<i class="material-icons">done</i>&emsp;Trim successfully saved!';
+    else if (code === 1) notiText = '<i class="material-icons">delete</i>&emsp;Trim Successfully deleted!';
+    else if (code === 2) notiText = '<i class="material-icons">report_problem</i>&emsp;Invalid input, please try again.';
   }
 
   event.preventDefault();
