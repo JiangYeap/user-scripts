@@ -193,7 +193,7 @@ function initStatusListener() {
 
 // Function which refreshes the UI on intervals based on current video.
 function updateWidgetUi() {
-  setInterval(uiStep, 250);
+  setInterval(uiStep, 125);
 
   function uiStep() {
     let vidId      = getUrlParameter('v');

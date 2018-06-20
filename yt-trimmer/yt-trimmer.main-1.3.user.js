@@ -74,7 +74,7 @@ function updateEntry(event) {
 
 // Function which trims videos by performing checks on intervals.
 function trim() {
-  setInterval(step, 250);
+  setInterval(step, 125);
 
   function step() {
     let player = document.querySelector('#movie_player');
