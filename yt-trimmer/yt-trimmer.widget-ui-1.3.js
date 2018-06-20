@@ -15,26 +15,10 @@ const CSS_OLD = //
     }
 
     #trim-box {
-        opacity: 0;
-        transition: opacity 400ms ease-in-out;
-        position: absolute;
         top: 55px;
         margin-left: 12px;
-        padding: 1em;
-        width: 100%;
-        height: auto;
         max-width: 223px;
-        background: rgba(42, 45, 50, 0.85);
-        line-height: 1.4;
         font-size: 90%;
-        text-align: center;
-        color: #ffffff;
-    }
-
-    #trim-box > i {
-        font-size: 100%;
-        line-height: normal;
-        vertical-align:middle;
     }
   `;
 
@@ -62,6 +46,18 @@ const CSS_NEW = //
     #trim-form {
         margin-top: 2px
     }
+
+    #trim-box {
+        top: 70px;
+        margin-left: 18px;
+        max-width: 253px;
+        font-size: 1.3em;
+        font-style: italic;
+    }
+
+    #trim-widget > button {
+        cursor: pointer;
+    }
   `;
 
 let CSS_STR = //
@@ -81,6 +77,25 @@ let CSS_STR = //
         display: inline-block;
         width: auto;
         height: 100%;
+    }
+
+    #trim-box {
+        opacity: 0;
+        transition: opacity 400ms ease-in-out;
+        position: absolute;
+        padding: 1em;
+        width: 100%;
+        height: auto;
+        background: rgba(42, 45, 50, 0.85);
+        line-height: 1.4;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    #trim-box > i {
+        font-size: 100%;
+        line-height: normal;
+        vertical-align:middle;
     }
 
     .trim-label {
@@ -105,7 +120,8 @@ let CSS_STR = //
       box-shadow: none;
     }
 
-    .trim-button {
+    #trim-button {
+        cursor: pointer;
         margin-left: 0.9em;
         background: #2980b9;
         padding: 4px 12px 4px 12px;
@@ -113,7 +129,7 @@ let CSS_STR = //
         color: #fff;
     }
 
-    .trim-button:hover {
+    #trim-button:hover {
         background: #2c3e50;
         box-shadow:none;
         -moz-box-shadow:none;
@@ -159,13 +175,13 @@ function setWidgetUi() {
   trimElem.id        = 'trim-widget';
   trimElem.innerHTML = //
     `
-      <a id="trim-status" class="tooltip-bottom"></a>
+      <span id="trim-status" class="tooltip-bottom"></span>
       <form id="trim-form">
           <label for="trim-start" class="trim-label">Start: </label>
           <input id="trim-start" class="trim-input" type="text" autocomplete="off" required="required" />
           <label for="trim-end" class="trim-label">End: </label>
           <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
-          <button type="submit" class="trim-button">Confirm</button>
+          <button id="trim-button" type="submit">Confirm</button>
       </form>
       <div id="trim-box"></div>
     `
