@@ -163,6 +163,24 @@ const CSS_NEW = //
 
 let CSS_STR = //
   `
+    .trim-input:not(:focus):invalid {
+        box-shadow: none;
+    }
+
+    .show {
+        visibility: visible;
+        opacity: 0.8;
+        transition: opacity 400ms ease-in-out;
+    }
+
+    .hide {
+        visibility: hidden;
+    }
+
+    #status-box {
+
+    }
+
     [data-tooltip] {
         position: relative;
         cursor: pointer;
@@ -269,6 +287,7 @@ function setWidgetUi() {
           <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
           <button type="submit" class="trim-button">Confirm</button>
       </form>
+      <div id="status-box" class="hide"></div>
     `
 
   container.append(trimElem);
