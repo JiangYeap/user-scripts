@@ -17,6 +17,10 @@
 
 // Function which handles submission of trim-form.
 function updateEntry(event) {
+  function showNotification(code) {
+
+  }
+
   event.preventDefault();
 
   let player     = document.querySelector('#movie_player');

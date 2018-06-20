@@ -1,5 +1,22 @@
 const CSS_OLD = //
   `
+    #trim-box {
+        opacity: 0;
+        transition: opacity 400ms ease-in-out;
+        position: absolute;
+        top: 55px;
+        margin-left: 12px;
+        padding: 1em;
+        width: 100%;
+        height: auto;
+        max-width: 223px;
+        background: rgba(42,45,50,0.85);
+        line-height: 1.4;
+        font-size: 90%;
+        text-align: center;
+        color: #ffffff;
+    }
+
     #trim-widget {
         float: right;
         visibility: hidden;
@@ -9,72 +26,9 @@ const CSS_OLD = //
         margin-top: -27px;
     }
 
-    #trim-widget > * {
-        line-height: normal;
-        vertical-align: middle;
-    }
-
     #trim-status {
-        display: inline-block;
-        background: #888888;
         width: 1em;
         height: 1em;
-        border-radius: 50%;
-    }
-
-    #trim-form {
-        display: inline-block;
-        width: auto;
-        height: 100%;
-    }
-
-    .trim-label {
-        margin-left: 0.9em;
-    }
-
-    .trim-input {
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        padding: 0px;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        background: transparent;
-        text-align: center;
-        height: 100%;
-        width: 3em;
-    }
-
-    .trim-button {
-        margin-left: 0.9em;
-        background: #2980b9;
-        padding: 4px 12px 4px 12px;
-        border: none;
-        color: #fff;
-    }
-
-    .trim-button:hover {
-        background: #2c3e50;
-        box-shadow:none;
-        -moz-box-shadow:none;
-        -webkit-box-shadow:none;
-    }
-
-    ::-webkit-input-placeholder {
-        font-style: italic;
-    }
-
-    :-moz-placeholder {
-        font-style: italic;
-    }
-
-    ::-moz-placeholder {
-        font-style: italic;
-    }
-
-    :-ms-input-placeholder {
-        font-style: italic;
     }
   `;
 
@@ -91,16 +45,29 @@ const CSS_NEW = //
     }
 
     #trim-widget > * {
+        font-size: 1.5em;
+    }
+
+    #trim-status {
+        width: 1.1em;
+        height: 1.1em;
+    }
+
+    #trim-form {
+        margin-top: 2px
+    }
+  `;
+
+let CSS_STR = //
+  `
+    #trim-widget > * {
         line-height: normal;
         vertical-align: middle;
-        font-size: 1.5em;
     }
 
     #trim-status {
         display: inline-block;
         background: #888888;
-        width: 1.1em;
-        height: 1.1em;
         border-radius: 50%;
     }
 
@@ -108,25 +75,28 @@ const CSS_NEW = //
         display: inline-block;
         width: auto;
         height: 100%;
-        margin-top: 2px
     }
 
     .trim-label {
-        margin-left: 0.9em;
+      margin-left: 0.9em;
     }
 
     .trim-input {
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        padding: 0px;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        background: transparent;
-        text-align: center;
-        height: 100%;
-        width: 3em;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      outline: none;
+      padding: 0px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      background: transparent;
+      text-align: center;
+      height: 100%;
+      width: 3em;
+    }
+
+    .trim-input:not(:focus):invalid {
+      box-shadow: none;
     }
 
     .trim-button {
@@ -144,6 +114,14 @@ const CSS_NEW = //
         -webkit-box-shadow:none;
     }
 
+    .show-status {
+        opacity: 0.85 !important;
+    }
+
+    .show-notification {
+        opacity: 0.85 !important;
+    }
+
     ::-webkit-input-placeholder {
         font-style: italic;
     }
@@ -158,38 +136,6 @@ const CSS_NEW = //
 
     :-ms-input-placeholder {
         font-style: italic;
-    }
-  `;
-
-let CSS_STR = //
-  `
-    .trim-input:not(:focus):invalid {
-        box-shadow: none;
-    }
-
-    .show-status {
-        opacity: 0.85 !important;
-    }
-
-    .show-notification {
-        opacity: 0.85 !important;
-    }
-
-    #trim-box {
-        opacity: 0;
-        transition: opacity 400ms ease-in-out;
-        position: absolute;
-        top: 55px;
-        margin-left: 12px;
-        padding: 1em;
-        width: 100%;
-        height: auto;
-        max-width: 223px;
-        background: rgba(42,45,50,0.85);
-        line-height: 1.4;
-        font-size: 90%;
-        text-align: center;
-        color: #ffffff;
     }
   `;
 
@@ -233,6 +179,8 @@ function initStatusListener() {
     else statusText = 'Video is not trimmed. Set start and end time to trim.';
 
     boxElem.textContent      = statusText;
+    boxElem.style.maxWidth   = '223px';
+    boxElem.style.marginLeft = '12px';
     boxElem.style.background = 'rgba(42,45,50,0.85)';
     boxElem.classList.add('show-status');
   };
