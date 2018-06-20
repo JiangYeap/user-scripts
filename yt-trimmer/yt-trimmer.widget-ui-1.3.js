@@ -174,11 +174,20 @@ let CSS_STR = //
     }
 
     .hide {
+        opacity: 0;
         visibility: hidden;
     }
 
     #status-box {
-
+        position: absolute;
+        top: 55px;
+        max-width: 250px;
+        height: auto;
+        padding: 1em;
+        line-height: 1.4;
+        font-size: 90%;
+        color: #ffffff;
+        background: rgba(42,45,50,0.85);
     }
 
     [data-tooltip] {
@@ -287,7 +296,7 @@ function setWidgetUi() {
           <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
           <button type="submit" class="trim-button">Confirm</button>
       </form>
-      <div id="status-box" class="hide"></div>
+      <div id="status-box" class="show">Video is trimmed set start and end to -1 to remove entry. Hover over circle for more info.</div>
     `
 
   container.append(trimElem);
