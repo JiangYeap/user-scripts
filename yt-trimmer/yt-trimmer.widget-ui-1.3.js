@@ -188,12 +188,13 @@ function initStatusListener() {
     boxElem.innerHTML        = boxHtml
     boxElem.classList.add('show-status');
   };
-
   statusElem.onmouseout  = () => { boxElem.classList.remove('show-status') };
 }
 
 // Function which refreshes the UI on intervals based on current video.
 function updateWidgetUi() {
+  setInterval(uiStep, 250);
+
   function uiStep() {
     let vidId      = getUrlParameter('v');
     let inputStart = document.querySelector('#trim-start');
@@ -220,6 +221,4 @@ function updateWidgetUi() {
       }
     }
   }
-
-  setInterval(uiStep, 250);
 }

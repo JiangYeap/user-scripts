@@ -74,6 +74,8 @@ function updateEntry(event) {
 
 // Function which trims videos by performing checks on intervals.
 function trim() {
+  setInterval(step, 250);
+
   function step() {
     let player = document.querySelector('#movie_player');
     let vidId  = getUrlParameter('v');
@@ -87,13 +89,11 @@ function trim() {
       if (Math.floor(currentTime) >= endTime) player.seekTo(player.getDuration());
     }
   }
-
-  setInterval(step, 250);
 }
 
 const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
-const SUB_LSTNR  = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
-const LSTNRS_STR = SUB_LSTNR;
+const FORM_LSTNR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
+const LSTNRS_STR = FORM_LSTNR;
 
 const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC], [FORMAT_STR, STR_INJ], [updatePlayerUi, FN_EXEC]];
 const GUI_STMT  = [[initStatusListener, FN_EXEC], [LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
