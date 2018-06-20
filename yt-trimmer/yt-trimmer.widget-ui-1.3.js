@@ -1,6 +1,6 @@
 const CSS_OLD = //
   `
-    #trim-box {
+    #trim-widget {
         float: right;
         visibility: hidden;
         width: auto;
@@ -9,7 +9,7 @@ const CSS_OLD = //
         margin-top: -27px;
     }
 
-    #trim-box > * {
+    #trim-widget > * {
         line-height: normal;
         vertical-align: middle;
     }
@@ -80,7 +80,7 @@ const CSS_OLD = //
 
 const CSS_NEW = //
   `
-    #trim-box {
+    #trim-widget {
         float: right;
         visibility: hidden;
         width: auto;
@@ -90,7 +90,7 @@ const CSS_NEW = //
         margin-left: 5em;
     }
 
-    #trim-box > * {
+    #trim-widget > * {
         line-height: normal;
         vertical-align: middle;
         font-size: 1.5em;
@@ -177,7 +177,7 @@ let CSS_STR = //
         transition: opacity 400ms ease-in-out
     }
 
-    #status-box {
+    #trim-box {
         position: absolute;
         top: 55px;
         margin-left: 12px;
@@ -203,7 +203,7 @@ function setWidgetUi() {
   }
   else CSS_STR += CSS_OLD;
 
-  trimElem.id        = 'trim-box';
+  trimElem.id        = 'trim-widget';
   trimElem.innerHTML = //
     `
       <span id="trim-status" class="tooltip-bottom"></span>
@@ -214,7 +214,7 @@ function setWidgetUi() {
           <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
           <button type="submit" class="trim-button">Confirm</button>
       </form>
-      <div id="status-box" class="show">Video is trimmed set start and end to -1 to remove entry. Hover over circle for more info.</div>
+      <div id="trim-box" class="show">Video is trimmed set start and end to -1 to remove entry. Hover over circle for more info.</div>
     `
 
   container.append(trimElem);
@@ -226,7 +226,7 @@ function updateWidgetUi() {
     let vidId      = getUrlParameter('v');
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
-    let trimElem   = document.querySelector('#trim-box');
+    let trimElem   = document.querySelector('#trim-widget');
     let trimStatus = document.querySelector('#trim-status');
     let container  = document.querySelector('#yt-masthead-content');
     let searchBar  = document.querySelector('#masthead-search');
