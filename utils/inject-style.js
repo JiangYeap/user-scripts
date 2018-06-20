@@ -5,9 +5,11 @@ function injectCss(str) {
   document.head.appendChild(styleElem);
 }
 
-// Argument attrs is a list of [<Attribute>, <Value>] to be added to style tag.
-function injectCssSrc(src, attrs) {
+// Optional argument attrs is a list of [<Attribute>, <Value>] to be added to style tag.
+function injectCssSrc(src) {
   let styleElem  = document.createElement('link');
+  if (typeof attrs === 'undefined') attrs = [];
+
   styleElem.rel  = 'stylesheet';
   styleElem.type = 'text/css'
   styleElem.href = src;

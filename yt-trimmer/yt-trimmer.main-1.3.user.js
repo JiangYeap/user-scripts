@@ -18,7 +18,12 @@
 // Function which handles submission of trim-form.
 function updateEntry(event) {
   function showNotification(code) {
+    let boxElem  = document.querySelector('#trim-box');
+    let notiText = '';
 
+    if (code === 0) boxElem.innerHTML = 'Trim successfully saved!';
+    else if (code === 1) notiText = 'Trim Successfully deleted!';
+    else if (code === 2) notiText = 'Invalid input, please try again.';
   }
 
   event.preventDefault();
@@ -78,6 +83,7 @@ const GUI_STMT  = [[initStatusListener, FN_EXEC], [LSTNRS_STR, STR_INJ], [update
 
 // Injects main logic of script immediately.
 injectJs(MAIN_STMT);
+injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons', []);
 
 // Injects GUI after header loads.
 onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', () => {

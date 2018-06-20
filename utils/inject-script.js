@@ -23,9 +23,11 @@ function injectJs(stmts) {
   document.head.removeChild(scriptElem);
 }
 
-// Argument attrs is a list of [<Attribute>, <Value>] to be added to script tag.
+// Optional argument attrs is a list of [<Attribute>, <Value>] to be added to script tag.
 function injectJsSrc(src, attrs) {
   let scriptElem  = document.createElement('script');
+  if (typeof attrs === 'undefined') attrs = [];
+
   scriptElem.src  = src;
   scriptElem.type = 'application/javascript';
 

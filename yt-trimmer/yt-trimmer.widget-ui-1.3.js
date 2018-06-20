@@ -9,7 +9,7 @@ const CSS_OLD = //
         padding: 1em;
         width: 100%;
         height: auto;
-        max-width: 223px;
+        max-width: 180px;
         background: rgba(42,45,50,0.85);
         line-height: 1.4;
         font-size: 90%;
@@ -178,10 +178,8 @@ function initStatusListener() {
     if (DICT[vidId]) statusText = 'Video is trimmed. Set start and end to -1 to delete entry.';
     else statusText = 'Video is not trimmed. Set start and end time to trim.';
 
-    boxElem.textContent      = statusText;
-    boxElem.style.maxWidth   = '223px';
-    boxElem.style.marginLeft = '12px';
     boxElem.style.background = 'rgba(42,45,50,0.85)';
+    boxElem.textContent      = statusText;
     boxElem.classList.add('show-status');
   };
 
@@ -208,13 +206,11 @@ function updateWidgetUi() {
         inputStart.placeholder      = secToTime(DICT[vidId][0]);
         inputEnd.placeholder        = secToTime(DICT[vidId][1]);
         trimStatus.style.background = '#2ecc71';
-        trimStatus.setAttribute('data-tooltip', 'Video is trimmed. Set start and end to -1 to delete entry.');
       }
       else {
         inputStart.placeholder      = 'mm:ss';
         inputEnd.placeholder        = 'mm:ss';
         trimStatus.style.background = '#888888';
-        trimStatus.setAttribute('data-tooltip', 'Video is not trimmed. Set start and end time to trim.');
       }
     }
   }
