@@ -168,109 +168,27 @@ let CSS_STR = //
     }
 
     .show {
-        visibility: visible;
         opacity: 0.8;
         transition: opacity 400ms ease-in-out;
     }
 
     .hide {
         opacity: 0;
-        visibility: hidden;
+        transition: opacity 400ms ease-in-out
     }
 
     #status-box {
         position: absolute;
         top: 55px;
-        max-width: 250px;
+        margin-left: 12px;
+        width: 100%;
         height: auto;
+        max-width: 223px;
         padding: 1em;
         line-height: 1.4;
         font-size: 90%;
         color: #ffffff;
         background: rgba(42,45,50,0.85);
-    }
-
-    [data-tooltip] {
-        position: relative;
-        cursor: pointer;
-    }
-
-    [data-tooltip]:before,
-    [data-tooltip]:after {
-        position: absolute;
-        visibility: hidden;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-        opacity: 0;
-        -webkit-transition:
-            opacity 0.2s ease-in-out,
-            visibility 0.2s ease-in-out,
-            -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-        -moz-transition:
-            opacity 0.2s ease-in-out,
-            visibility 0.2s ease-in-out,
-            -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-        transition:
-            opacity 0.2s ease-in-out,
-            visibility 0.2s ease-in-out,
-            transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-        -webkit-transform: translate3d(0, 0, 0);
-        -moz-transform:    translate3d(0, 0, 0);
-        transform:         translate3d(0, 0, 0);
-        pointer-events: none;
-    }
-
-    [data-tooltip]:before {
-        z-index: 1001;
-        border: 6px solid transparent;
-        background: transparent;
-        content: "";
-    }
-
-    [data-tooltip]:after {
-        z-index: 1000;
-        padding: 8px;
-        width: 160px;
-        background-color: #000;
-        background-color: hsla(0, 0%, 20%, 0.9);
-        color: #fff;
-        content: attr(data-tooltip);
-        font-size: 14px;
-        line-height: 1.2;
-    }
-
-    [data-tooltip]:hover:before,
-    [data-tooltip]:hover:after,
-    [data-tooltip]:focus:before,
-    [data-tooltip]:focus:after {
-        visibility: visible;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-        opacity: 1;
-    }
-
-    .tooltip-bottom:before,
-    .tooltip-bottom:after {
-        top: 100%;
-        bottom: auto;
-        left: 50%;
-    }
-
-    .tooltip-bottom:before {
-        margin-top: -12px;
-        margin-bottom: 0;
-        border-top-color: transparent;
-        border-bottom-color: #000;
-        border-bottom-color: hsla(0, 0%, 20%, 0.9);
-    }
-
-    .tooltip-bottom:hover:before,
-    .tooltip-bottom:hover:after,
-    .tooltip-bottom:focus:before,
-    .tooltip-bottom:focus:after {
-        -webkit-transform: translateY(12px);
-        -moz-transform:    translateY(12px);
-        transform:         translateY(12px);
     }
   `;
 
