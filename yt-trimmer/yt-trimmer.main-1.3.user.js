@@ -3,7 +3,7 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts YouTube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://github.com/JiangYeap/user-scripts/blob/master/yt-trimmer/yt-trimmer.listeners-1.3.user.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/bd16e1f6/yt-trimmer/yt-trimmer.listeners-1.3.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/82c772c6/yt-trimmer/yt-trimmer.player-ui-1.3.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/82c772c6/yt-trimmer/yt-trimmer.widget-ui-1.3.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/82c772c6/utils/elem-loaded.js
@@ -33,13 +33,7 @@ function trim() {
   }
 }
 
-const STTS_LSTNR = 'document.querySelector("#trim-status").addEventListener("mouseover", ' + showStatus + ');\n';
-const FORM_LSTNR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');\n';
-const BOX_LSTNR  = 'document.querySelector("#trim-box").addEventListener("click", ' + hideBox + ');\n';
-
-const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};\n';
-const LSTNRS_STR = FORM_LSTNR + BOX_LSTNR;
-
+const DICT_STR  = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};\n';
 const MAIN_STMT = [[DICT_STR, STR_INJ], [trim, FN_EXEC], [updatePlayerUi, FN_EXEC]];
 const GUI_STMT  = [[updateWidgetUi, FN_EXEC]];
 

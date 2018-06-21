@@ -14,10 +14,11 @@ function showStatus(event) {
   let boxElem = document.querySelector('#trim-box');
   let boxHtml = 'Oops, something went wrong!';
 
-  if (DICT[vidId])
-    boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
-  else
-    boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is not trimmed. Set start and end time to trim.';
+  const trimmed   = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
+  const untrimmed = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is not trimmed. Set start and end time to trim.';
+
+  if (DICT[vidId]) boxHtml = trimmed;
+  else boxHtml = untrimmed;
 
   boxElem.style.background = 'rgba(42, 45, 50, 0.85)';
   boxElem.innerHTML        = boxHtml
@@ -39,9 +40,6 @@ function updateEntry(event) {
   let vidTitle   = (document.querySelector('.title > yt-formatted-string:nth-child(1)')
                  || document.querySelector('#eow-title')).innerHTML.trim();
 
-  inputStart.value = '';
-  inputEnd.value   = '';
-
   if (startTime > player.getDuration()) startTime = player.getDuration();
   if (endTime > player.getDuration()) endTime = player.getDuration();
 
@@ -57,22 +55,29 @@ function updateEntry(event) {
   }
   else showNotification(2);
 
+  inputStart.value = '';
+  inputEnd.value   = '';
+  
   function showNotification(code) {
     let boxElem = document.querySelector('#trim-box');
     let boxBgrd = 'transparent';
     let boxHtml = 'Oops, something went wrong!';
 
+    const saved   = '<i class="material-icons">done</i>&nbsp;&nbsp;Trim successfully saved!';
+    const deleted = '<i class="material-icons">delete</i>&nbsp;&nbsp;Trim Successfully deleted!';
+    const invalid = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Invalid input, please try again.';
+
     if (code === 0) {
       boxBgrd = 'rgba(46, 213, 115, 0.85)';
-      boxHtml = '<i class="material-icons">done</i>&nbsp;&nbsp;Trim successfully saved!';
+      boxHtml = saved;
     }
     else if (code === 1) {
       boxBgrd = 'rgba(214, 48, 49, 0.85)';
-      boxHtml = '<i class="material-icons">delete</i>&nbsp;&nbsp;Trim Successfully deleted!';
+      boxHtml = deleted;
     }
     else if (code === 2) {
       boxBgrd = 'rgba(253, 203, 110, 0.85)';
-      boxHtml = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Invalid input, please try again.';
+      boxHtml = invalid;
     }
 
     boxElem.style.background = boxBgrd;
