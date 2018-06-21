@@ -44,7 +44,7 @@ function updateEntry(event) {
 
   if (startTime > player.getDuration()) startTime = player.getDuration();
   if (endTime > player.getDuration()) endTime = player.getDuration();
-  
+
   if (startTime == -1 && endTime == -1) {
     showNotification(1);
     delete DICT[vidId];
