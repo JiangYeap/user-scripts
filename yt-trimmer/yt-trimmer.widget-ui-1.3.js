@@ -207,7 +207,7 @@ function updateWidgetUi() {
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
     let trimElem   = document.querySelector('#trim-widget');
-    let trimStatus = document.querySelector('#trim-status');
+    let statusElem = document.querySelector('#trim-status');
     let container  = document.querySelector('#yt-masthead-content');
     let searchBar  = document.querySelector('#masthead-search');
 
@@ -219,12 +219,12 @@ function updateWidgetUi() {
       if (DICT[vidId]) {
         inputStart.placeholder      = secToTime(DICT[vidId][0]);
         inputEnd.placeholder        = secToTime(DICT[vidId][1]);
-        trimStatus.style.background = '#2ecc71';
+        statusElem.style.background = '#2ecc71';
       }
       else {
         inputStart.placeholder      = 'mm:ss';
         inputEnd.placeholder        = 'mm:ss';
-        trimStatus.style.background = '#888888';
+        statusElem.style.background = '#888888';
       }
     }
   }
