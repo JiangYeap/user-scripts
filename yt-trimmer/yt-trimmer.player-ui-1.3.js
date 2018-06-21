@@ -28,10 +28,8 @@ function updatePlayerUi() {
       let loadedStart = startTime / loadedTime * 100;
       let loadedEnd   = 100;
 
-      if (currentTime >= endTime)
-        playedEnd = endTime / currentTime * 100;
-      if (loadedTime >= endTime)
-        loadedEnd = endTime / loadedTime * 100;
+      if (currentTime >= endTime) playedEnd = endTime / currentTime * 100;
+      if (loadedTime >= endTime) loadedEnd = endTime / loadedTime * 100;
 
       vidBar.style.background    = barBg.format(barStart, barEnd);
       vidPlayed.style.background = playedBg.format(playedStart, playedEnd);
