@@ -3,12 +3,12 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts YouTube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/yt-trimmer/yt-trimmer.listeners-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/yt-trimmer/yt-trimmer.player-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/yt-trimmer/yt-trimmer.widget-ui-1.3.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/elem-loaded.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/inject-script.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/inject-style.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/yt-trimmer/yt-trimmer.listeners-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/yt-trimmer/yt-trimmer.player-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/yt-trimmer/yt-trimmer.widget-ui-1.3.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/utils/elem-loaded.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/utils/inject-script.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/utils/inject-style.js
 // @grant          none
 // @run-at         document-idle
 // @author         Jiang Yeap
@@ -39,8 +39,8 @@ const MAIN_STMT = [[DICT_STR, STR_INJ], [trim, FN_EXEC], [updatePlayerUi, FN_EXE
 const GUI_STMT  = [[initListeners, FN_EXEC], [updateWidgetUi, FN_EXEC]];
 
 // Injects dependencies and main logic of script immediately.
-injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/string-format.js');
-injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/time-conversion.js');
+injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/utils/string-format.js');
+injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/8328caf0/utils/time-conversion.js');
 injectJs(MAIN_STMT);
 
 injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
