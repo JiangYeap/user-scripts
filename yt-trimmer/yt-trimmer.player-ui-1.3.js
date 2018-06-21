@@ -6,9 +6,10 @@ function updatePlayerUi() {
 
   function playerStep() {
     let player = document.querySelector('#movie_player');
-    let vidId  = getUrlParameter('v');
+    let vidId  = null;
+    if (player) vidId = player.getVideoData()['video_id'];
 
-    if (DICT[vidId] && player) {
+    if (DICT[vidId]) {
       let currentTime = player.getCurrentTime();
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
@@ -31,7 +32,7 @@ function updatePlayerUi() {
       vidPlayed.style.background = playedBg.format(playedStart, playedEnd);
       vidLoaded.style.background = 'transparent';
     }
-    else if (!DICT[vidId] && player) {
+    else if (player) {
       let vidBar      = document.querySelector('.ytp-progress-list');
       let vidPlayed   = document.querySelector('.ytp-play-progress');
       let vidLoaded   = document.querySelector('.ytp-load-progress');

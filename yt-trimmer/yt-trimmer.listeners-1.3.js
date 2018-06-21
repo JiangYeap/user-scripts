@@ -11,7 +11,8 @@ function initListeners() {
 
   // Function which handles mouseover event on trim-status.
   function showStatus(event) {
-    let vidId   = getUrlParameter('v');
+    let player  = document.querySelector('#movie_player');
+    let vidId   = player.getVideoData()['video_id'];
     let boxElem = document.querySelector('#trim-box');
     let boxHtml = 'Oops, something went wrong!';
 
@@ -38,13 +39,13 @@ function initListeners() {
     event.preventDefault();
 
     let player     = document.querySelector('#movie_player');
+    let vidId      = player.getVideoData()['video_id'];
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
     let startTime  = timeToSec(inputStart.value);
     let endTime    = timeToSec(inputEnd.value);
-    let vidId      = getUrlParameter('v');
     let vidTitle   = (document.querySelector('.title > yt-formatted-string:nth-child(1)')
-    || document.querySelector('#eow-title')).innerHTML.trim();
+                   || document.querySelector('#eow-title')).innerHTML.trim();
 
     if (startTime > player.getDuration()) startTime = player.getDuration();
     if (endTime > player.getDuration()) endTime = player.getDuration();

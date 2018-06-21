@@ -9,7 +9,6 @@
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/elem-loaded.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/inject-script.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/inject-style.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/url-param.js
 // @grant          none
 // @run-at         document-idle
 // @author         Jiang Yeap
@@ -21,9 +20,10 @@ function trim() {
 
   function trimStep() {
     let player = document.querySelector('#movie_player');
-    let vidId  = getUrlParameter('v');
+    let vidId  = null;
+    if (player) vidId = player.getVideoData()['video_id'];
 
-    if (DICT[vidId] && player) {
+    if (DICT[vidId] && player.offsetWidth && player.offsetHeight) {
       let currentTime = player.getCurrentTime();
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
@@ -39,7 +39,6 @@ const MAIN_STMT = [[DICT_STR, STR_INJ], [trim, FN_EXEC], [updatePlayerUi, FN_EXE
 const GUI_STMT  = [[initListeners, FN_EXEC], [updateWidgetUi, FN_EXEC]];
 
 // Injects dependencies and main logic of script immediately.
-injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/url-param.js');
 injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/string-format.js');
 injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/d9346e2e/utils/time-conversion.js');
 injectJs(MAIN_STMT);

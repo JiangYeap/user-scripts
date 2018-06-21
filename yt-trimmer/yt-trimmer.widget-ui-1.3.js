@@ -185,7 +185,8 @@ function initStatusListener() {
   let boxElem    = document.querySelector('#trim-box');
 
   statusElem.onmouseover = () => {
-    let vidId   = getUrlParameter('v');
+    let player  = document.querySelector('#movie_player');
+    let vidId   = player.getVideoData()['video_id'];
     let boxHtml = 'Oops, something went wrong!';
 
     if (DICT[vidId]) boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
@@ -203,7 +204,10 @@ function updateWidgetUi() {
   setInterval(widgetStep, 125);
 
   function widgetStep() {
-    let vidId      = getUrlParameter('v');
+    let player = document.querySelector('#movie_player');
+    let vidId  = null;
+    if (player) vidId = player.getVideoData()['video_id'];
+
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
     let trimElem   = document.querySelector('#trim-widget');
@@ -211,7 +215,8 @@ function updateWidgetUi() {
     let container  = document.querySelector('#yt-masthead-content');
     let searchBar  = document.querySelector('#masthead-search');
 
-    if (!vidId) trimElem.style.visibility = 'hidden';
+    if (!vidId || !player.offsetWidth || !player.offsetHeight)
+      trimElem.style.visibility = 'hidden';
     else {
       if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) trimElem.style.visibility = 'hidden';
       else trimElem.style.visibility = 'visible';
