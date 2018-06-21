@@ -215,8 +215,7 @@ function updateWidgetUi() {
     let container  = document.querySelector('#yt-masthead-content');
     let searchBar  = document.querySelector('#masthead-search');
 
-    if (!vidId || !player.offsetWidth || !player.offsetHeight)
-      trimElem.style.visibility = 'hidden';
+    if (!vidId || !player.getDuration()) trimElem.style.visibility = 'hidden';
     else {
       if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) trimElem.style.visibility = 'hidden';
       else trimElem.style.visibility = 'visible';

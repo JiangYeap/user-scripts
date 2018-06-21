@@ -23,7 +23,7 @@ function trim() {
     let vidId  = null;
     if (player) vidId = player.getVideoData()['video_id'];
 
-    if (DICT[vidId] && player.offsetWidth && player.offsetHeight) {
+    if (DICT[vidId] && player.getDuration()) {
       let currentTime = player.getCurrentTime();
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
