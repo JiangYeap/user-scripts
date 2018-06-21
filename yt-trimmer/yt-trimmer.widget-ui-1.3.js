@@ -101,8 +101,6 @@ let CSS_STR = //
 
     .trim-input {
         box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         outline: none;
         padding: 0px;
         border: none;
@@ -129,8 +127,6 @@ let CSS_STR = //
     #trim-button:hover {
         background: #2c3e50;
         box-shadow:none;
-        -moz-box-shadow:none;
-        -webkit-box-shadow:none;
     }
 
     .show-status {
@@ -147,15 +143,11 @@ let CSS_STR = //
         font-style: italic;
     }
 
-    :-moz-placeholder {
-        font-style: italic;
-    }
-
-    ::-moz-placeholder {
-        font-style: italic;
-    }
-
     :-ms-input-placeholder {
+        font-style: italic;
+    }
+
+    ::placeholder {
         font-style: italic;
     }
   `;

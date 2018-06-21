@@ -57,7 +57,7 @@ function updateEntry(event) {
 
   inputStart.value = '';
   inputEnd.value   = '';
-  
+
   function showNotification(code) {
     let boxElem = document.querySelector('#trim-box');
     let boxBgrd = 'transparent';
