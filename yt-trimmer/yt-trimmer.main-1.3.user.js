@@ -8,7 +8,6 @@
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/elem-loaded.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/inject-script.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/inject-style.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/string-format.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/time-conversion.js
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/url-param.js
 // @grant          none
@@ -101,11 +100,12 @@ const FORM_LSTNR = 'document.querySelector("#trim-form").addEventListener("submi
 const BOX_LSTNR  = 'document.querySelector("#trim-box").addEventListener("click", ' + hideBox + ');';
 const LSTNRS_STR = FORM_LSTNR + BOX_LSTNR;
 
-const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC], [FORMAT_STR, STR_INJ], [updatePlayerUi, FN_EXEC]];
+const MAIN_STMT = [[DICT_STR, STR_INJ], [getUrlParameter, FN_DEF], [secToTime, FN_DEF], [timeToSec, FN_DEF], [trim, FN_EXEC], [updatePlayerUi, FN_EXEC]];
 const GUI_STMT  = [[initStatusListener, FN_EXEC], [LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
 
 // Injects main logic of script immediately.
 injectJs(MAIN_STMT);
+injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e1129a4e/utils/string-format.js');
 injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 // Injects GUI after header loads.
