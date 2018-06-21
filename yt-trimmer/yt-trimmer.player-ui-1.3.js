@@ -2,9 +2,9 @@ function updatePlayerUi() {
   let barBg    = 'linear-gradient(to right, transparent {0}%, rgba(129, 236, 236, 0.40) {0}%, rgba(129, 236, 236, 0.40) {1}%, transparent {1}%)';
   let playedBg = 'linear-gradient(to right, rgba(255, 0, 0, 0.25) {0}%, #d63031 {0}%, #d63031 {1}%, rgba(255, 0, 0, 0.25) {1}%)';
 
-  setInterval(stepUi, 125);
+  setInterval(playerStep, 125);
 
-  function stepUi() {
+  function playerStep() {
     let player = document.querySelector('#movie_player');
     let vidId  = getUrlParameter('v');
 

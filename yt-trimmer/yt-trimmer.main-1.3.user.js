@@ -16,9 +16,9 @@
 
 // Function which trims videos by performing checks on intervals.
 function trim() {
-  setInterval(step, 125);
+  setInterval(trimStep, 125);
 
-  function step() {
+  function trimStep() {
     let player = document.querySelector('#movie_player');
     let vidId  = getUrlParameter('v');
 
@@ -35,19 +35,19 @@ function trim() {
 
 const DICT_STR  = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};\n';
 const MAIN_STMT = [[DICT_STR, STR_INJ], [trim, FN_EXEC], [updatePlayerUi, FN_EXEC]];
-const GUI_STMT  = [[updateWidgetUi, FN_EXEC]];
+const GUI_STMT  = [[initListeners, FN_EXEC], [updateWidgetUi, FN_EXEC]];
 
 // Injects dependencies and main logic of script immediately.
-injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
+injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/79fe1630/utils/url-param.js');
 injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/79fe1630/utils/string-format.js');
 injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/79fe1630/utils/time-conversion.js');
-injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/79fe1630/utils/url-param.js');
 injectJs(MAIN_STMT);
+
+injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 // Injects GUI after header loads.
 onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', () => {
   setWidgetUi();
   injectCss(CSS_STR);
-  initListeneers();
   injectJs(GUI_STMT);
 });

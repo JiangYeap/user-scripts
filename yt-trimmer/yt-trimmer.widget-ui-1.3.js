@@ -200,9 +200,9 @@ function initStatusListener() {
 
 // Function which refreshes the UI on intervals based on current video.
 function updateWidgetUi() {
-  setInterval(uiStep, 125);
+  setInterval(widgetStep, 125);
 
-  function uiStep() {
+  function widgetStep() {
     let vidId      = getUrlParameter('v');
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
