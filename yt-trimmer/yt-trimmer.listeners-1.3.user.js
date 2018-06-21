@@ -1,6 +1,29 @@
-// Function which handles click on trim box.
+// Function which handles click event on trim-box.
 function hideBox(event) {
   document.querySelector('#trim-box').classList.remove('show-status', 'show-notification');
+}
+
+// Function which handles mouseout event on trim-status.
+function hideStatus(event) {
+  document.querySelector('#trim-box').classList.remove('show-status');
+}
+
+// Function which handles mouseover event on trim-status.
+function showStatus(event) {
+  let vidId   = getUrlParameter('v');
+  let boxElem = document.querySelector('#trim-box');
+  let boxHtml = 'Oops, something went wrong!';
+
+  if (DICT[vidId])
+    boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
+  else
+    boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is not trimmed. Set start and end time to trim.';
+
+  boxElem.style.background = 'rgba(42, 45, 50, 0.85)';
+  boxElem.innerHTML        = boxHtml
+
+  boxElem.classList.remove('show-notification');
+  boxElem.classList.add('show-status');
 }
 
 // Function which handles submission of trim-form.
@@ -21,7 +44,7 @@ function updateEntry(event) {
 
   if (startTime > player.getDuration()) startTime = player.getDuration();
   if (endTime > player.getDuration()) endTime = player.getDuration();
-
+  
   if (startTime == -1 && endTime == -1) {
     showNotification(1);
     delete DICT[vidId];
@@ -54,8 +77,22 @@ function updateEntry(event) {
 
     boxElem.style.background = boxBgrd;
     boxElem.innerHTML        = boxHtml
+
+    boxElem.classList.remove('show-status');
     boxElem.classList.add('show-notification');
 
     setTimeout(() => { boxElem.classList.remove('show-notification') }, 2500);
   }
+}
+
+// Function which initialises all listeners.
+function initListeneers() {
+  let statusElem = document.querySelector('#trim-status');
+  let formElem   = document.querySelector('#trim-form');
+  let boxElem    = document.querySelector('#trim-box');
+
+  statusElem.onmouseover = showStatus;
+  statusElem.onmouseout  = hideStatus;
+  formElem.onsubmit      = updateEntry;
+  boxElem.onclick        = hideBox;
 }

@@ -33,13 +33,15 @@ function trim() {
   }
 }
 
-const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};';
-const FORM_LSTNR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');';
-const BOX_LSTNR  = 'document.querySelector("#trim-box").addEventListener("click", ' + hideBox + ');';
+const STTS_LSTNR = 'document.querySelector("#trim-status").addEventListener("mouseover", ' + showStatus + ');\n';
+const FORM_LSTNR = 'document.querySelector("#trim-form").addEventListener("submit", ' + updateEntry + ');\n';
+const BOX_LSTNR  = 'document.querySelector("#trim-box").addEventListener("click", ' + hideBox + ');\n';
+
+const DICT_STR   = 'let DICT = JSON.parse(localStorage.getItem("dict")) || {};\n';
 const LSTNRS_STR = FORM_LSTNR + BOX_LSTNR;
 
 const MAIN_STMT = [[DICT_STR, STR_INJ], [trim, FN_EXEC], [updatePlayerUi, FN_EXEC]];
-const GUI_STMT  = [[initStatusListener, FN_EXEC], [LSTNRS_STR, STR_INJ], [updateWidgetUi, FN_EXEC]];
+const GUI_STMT  = [[updateWidgetUi, FN_EXEC]];
 
 // Injects dependencies and main logic of script immediately.
 injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/82c772c6/utils/string-format.js');
@@ -52,5 +54,6 @@ injectJs(MAIN_STMT);
 onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', () => {
   setWidgetUi();
   injectCss(CSS_STR);
+  initListeneers();
   injectJs(GUI_STMT);
 });
