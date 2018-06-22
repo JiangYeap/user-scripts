@@ -10,7 +10,7 @@ function updatePlayerUi() {
     let vidId  = null;
     if (player) vidId = player.getVideoData()['video_id'];
 
-    if (DICT[vidId] && !player.getAdState()) {
+    if (DICT[vidId] && player.getAdState() !== 1) {
       let vidLength   = player.getDuration();
       let currentTime = player.getCurrentTime();
       let loadedTime  = player.getVideoLoadedFraction() * vidLength;
