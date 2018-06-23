@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           YouTube Trimmer
+// @name           YouTube Test
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts YouTube video at start mark and skips to end of video when current time exceeds end mark.
@@ -310,102 +310,6 @@ function trim() {
 }
 
 const MAIN_STMT = [[trim, FN_EXEC]];
-
-const BASE_CSS = //
-  `
-    #trim-widget > * {
-        line-height: normal;
-        vertical-align: middle;
-    }
-
-    #trim-status {
-        display: inline-block;
-        background: #888888;
-        border-radius: 50%;
-    }
-
-    #trim-form {
-        display: inline-block;
-        width: auto;
-        height: 100%;
-    }
-
-    #trim-box {
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 400ms ease-in-out;
-        position: absolute;
-        padding: 1em;
-        width: 100%;
-        height: auto;
-        background: rgba(42, 45, 50, 0.85);
-        line-height: 1.4;
-        text-align: center;
-        color: #ffffff;
-    }
-
-    #trim-box > i {
-        font-size: 100%;
-        line-height: normal;
-        vertical-align:middle;
-    }
-
-    .trim-label {
-        margin-left: 0.9em;
-    }
-
-    .trim-input {
-        box-sizing: border-box;
-        outline: none;
-        padding: 0px;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        background: transparent;
-        text-align: center;
-        height: 100%;
-        width: 3em;
-    }
-
-    .trim-input:not(:focus):invalid {
-        box-shadow: none;
-    }
-
-    #trim-button {
-        cursor: pointer;
-        margin-left: 0.9em;
-        background: #2980b9;
-        padding: 4px 12px 4px 12px;
-        border: none;
-        color: #fff;
-    }
-
-    #trim-button:hover {
-        background: #2c3e50;
-        box-shadow:none;
-    }
-
-    .show-status {
-        pointer-events: auto !important;
-        opacity: 1 !important;
-    }
-
-    .show-notification {
-        pointer-events: auto !important;
-        opacity: 1 !important;
-    }
-
-    ::-webkit-input-placeholder {
-        font-style: italic;
-    }
-
-    :-ms-input-placeholder {
-        font-style: italic;
-    }
-
-    ::placeholder {
-        font-style: italic;
-    }
-  `;
 
 document.addEventListener('DOMContentLoaded', () => {
   injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
