@@ -1,62 +1,4 @@
-const CSS_OLD = //
-  `
-    #trim-widget {
-        float: right;
-        visibility: hidden;
-        width: auto;
-        height: 23px;
-        line-height: 23px;
-        margin-top: -27px;
-    }
-
-    #trim-status {
-        width: 1em;
-        height: 1em;
-    }
-
-    #trim-box {
-        top: 55px;
-        margin-left: 12px;
-        max-width: 223px;
-        font-size: 90%;
-    }
-  `;
-
-const CSS_NEW = //
-  `
-    #trim-widget {
-        float: right;
-        visibility: hidden;
-        width: auto;
-        height: 23px;
-        line-height: 23px;
-        margin-top: 5px;
-        margin-left: 5em;
-    }
-
-    #trim-widget > * {
-        font-size: 1.5em;
-    }
-
-    #trim-status {
-        width: 1.1em;
-        height: 1.1em;
-    }
-
-    #trim-form {
-        margin-top: 2px
-    }
-
-    #trim-box {
-        top: 70px;
-        margin-left: 18px;
-        max-width: 253px;
-        font-size: 1.3em;
-        font-style: italic;
-    }
-  `;
-
-let CSS_STR = //
+const BASE_CSS = //
   `
     #trim-widget > * {
         line-height: normal;
@@ -154,17 +96,77 @@ let CSS_STR = //
 
 // Function which initialises UI for application.
 function setWidgetUi() {
+  const CSS_OLD = //
+    `
+      #trim-widget {
+          float: right;
+          visibility: hidden;
+          width: auto;
+          height: 23px;
+          line-height: 23px;
+          margin-top: -27px;
+      }
+
+      #trim-status {
+          width: 1em;
+          height: 1em;
+      }
+
+      #trim-box {
+          top: 55px;
+          margin-left: 12px;
+          max-width: 223px;
+          font-size: 90%;
+      }
+    `;
+
+  const CSS_NEW = //
+    `
+      #trim-widget {
+          float: right;
+          visibility: hidden;
+          width: auto;
+          height: 23px;
+          line-height: 23px;
+          margin-top: 5px;
+          margin-left: 5em;
+      }
+
+      #trim-widget > * {
+          font-size: 1.5em;
+      }
+
+      #trim-status {
+          width: 1.1em;
+          height: 1.1em;
+      }
+
+      #trim-form {
+          margin-top: 2px
+      }
+
+      #trim-box {
+          top: 70px;
+          margin-left: 18px;
+          max-width: 253px;
+          font-size: 1.3em;
+          font-style: italic;
+      }
+    `;
+
   let trimElem  = document.createElement('span');
   let container = document.getElementById('yt-masthead-content');
+  let styleElem = document.createElement('style');
+  let addCss    = CSS_OLD;
 
   if (!container) {
     container = document.getElementsByTagName('ytd-searchbox')[0];
-    CSS_STR += CSS_NEW;
+    let addCss = CSS_NEW;
   }
-  else CSS_STR += CSS_OLD;
 
-  trimElem.id        = 'trim-widget';
-  trimElem.innerHTML = //
+  styleElem.innerHTML = ADD_CSS;
+  trimElem.id         = 'trim-widget';
+  trimElem.innerHTML  = //
     `
       <span id="trim-status" class="tooltip-bottom"></span>
       <form id="trim-form">
@@ -176,6 +178,8 @@ function setWidgetUi() {
       </form>
       <div id="trim-box"></div>
     `
+
+  document.head.appendChild(styleElem);
   container.append(trimElem);
 }
 
