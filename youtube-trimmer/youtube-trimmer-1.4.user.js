@@ -41,8 +41,12 @@ function trim() {
   }
 
   function playerStep() {
-    let player = document.querySelector('#movie_player');
-    let vidId  = null;
+    let player    = document.querySelector('#movie_player');
+    let vidBar    = document.querySelector('.ytp-progress-list');
+    let vidPlayed = document.querySelector('.ytp-play-progress');
+    let vidLoaded = document.querySelector('.ytp-load-progress');
+
+    let vidId     = null;
     if (player) vidId = player.getVideoData()['video_id'];
 
     if (DICT[vidId] && player.getAdState() !== 1) {
@@ -51,10 +55,6 @@ function trim() {
       let loadedTime  = player.getVideoLoadedFraction() * vidLength;
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
-
-      let vidBar      = document.querySelector('.ytp-progress-list');
-      let vidPlayed   = document.querySelector('.ytp-play-progress');
-      let vidLoaded   = document.querySelector('.ytp-load-progress');
 
       let barStart    = (startTime + 0.33) / vidLength * 100;
       let barEnd      = (endTime - 0.33) / vidLength * 100;
@@ -71,10 +71,6 @@ function trim() {
       vidLoaded.style.background = loadedBg.format(loadedStart, loadedEnd);
     }
     else if (player) {
-      let vidBar      = document.querySelector('.ytp-progress-list');
-      let vidPlayed   = document.querySelector('.ytp-play-progress');
-      let vidLoaded   = document.querySelector('.ytp-load-progress');
-
       vidBar.style.background    = '';
       vidPlayed.style.background = '';
       vidLoaded.style.background = '';
