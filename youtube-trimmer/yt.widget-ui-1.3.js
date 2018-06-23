@@ -179,26 +179,6 @@ function setWidgetUi() {
   container.append(trimElem);
 }
 
-// Function which initialises hover listener for trim-status.
-function initStatusListener() {
-  let statusElem = document.querySelector('#trim-status');
-  let boxElem    = document.querySelector('#trim-box');
-
-  statusElem.onmouseover = () => {
-    let player  = document.querySelector('#movie_player');
-    let vidId   = player.getVideoData()['video_id'];
-    let boxHtml = 'Oops, something went wrong!';
-
-    if (DICT[vidId]) boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is trimmed. Set start and end to -1 to delete entry.';
-    else boxHtml = '<i class="material-icons">info</i>&nbsp;&nbsp;Video is not trimmed. Set start and end time to trim.';
-
-    boxElem.style.background = 'rgba(42, 45, 50, 0.85)';
-    boxElem.innerHTML        = boxHtml
-    boxElem.classList.add('show-status');
-  };
-  statusElem.onmouseout  = () => { boxElem.classList.remove('show-status') };
-}
-
 // Function which refreshes the UI on intervals based on current video.
 function updateWidgetUi() {
   setInterval(widgetStep, 125);
