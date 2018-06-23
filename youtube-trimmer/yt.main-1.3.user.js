@@ -3,8 +3,8 @@
 // @version        1.3
 // @include        https://www.youtube.com/*
 // @description    Starts YouTube video at start mark and skips to end of video when current time exceeds end mark.
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/inject-script.js
-// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/inject-style.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/inject-script.js
+// @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/inject-style.js
 // @grant          none
 // @run-at         document-start
 // @author         Jiang Yeap
@@ -313,8 +313,8 @@ const MAIN_STMT = [[trim, FN_EXEC]];
 
 document.addEventListener('DOMContentLoaded', () => {
   injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
-  injectCss(BASE_CSS);
-  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/string-format.js');
-  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/time-conversion.js');
+  injectCssSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/youtube-trimmer/base.css');
+  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/string-format.js');
+  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/time-conversion.js');
   injectJs(MAIN_STMT);
 }, false);
