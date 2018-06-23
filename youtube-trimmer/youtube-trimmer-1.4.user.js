@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name           YouTube Test
-// @version        1.3
+// @name           YouTube Trimmer
+// @version        1.4
 // @include        https://www.youtube.com/*
 // @description    Starts YouTube video at start mark and skips to end of video when current time exceeds end mark.
 // @require        https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/inject-script.js
