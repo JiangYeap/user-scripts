@@ -50,7 +50,7 @@ function initListeners() {
     if (startTime > player.getDuration()) startTime = player.getDuration();
     if (endTime > player.getDuration()) endTime = player.getDuration();
 
-    if (player.getVideoData['isLive']) showNotification(3);
+    if (player.getVideoData()['isLive']) showNotification(3);
     else if (startTime == -1 && endTime == -1) {
       showNotification(1);
       delete DICT[vidId];
@@ -74,6 +74,7 @@ function initListeners() {
       const saved   = '<i class="material-icons">done</i>&nbsp;&nbsp;Trim successfully saved!';
       const deleted = '<i class="material-icons">delete</i>&nbsp;&nbsp;Trim Successfully deleted!';
       const invalid = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Invalid input, please try again.';
+      const live    = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Unable to trim live videos.';
 
       if (code === 0) {
         boxBgrd = 'rgba(46, 213, 115, 0.85)';

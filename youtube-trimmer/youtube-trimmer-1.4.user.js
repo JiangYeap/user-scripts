@@ -19,12 +19,9 @@ function trim() {
   setInterval(trimStep, 125);
   setInterval(playerStep, 125);
 
-  onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', function() {
-    setWidgetUi();
-    initListeners();
-    setInterval(widgetStep, 125);
-  });
+  onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', initWidget);
 
+  // Function which handles the trim logic.
   function trimStep() {
     let player = document.querySelector('#movie_player');
     let vidId  = null;
@@ -40,13 +37,14 @@ function trim() {
     }
   }
 
+  // Function which handles the player Ui.
   function playerStep() {
     let player    = document.querySelector('#movie_player');
     let vidBar    = document.querySelector('.ytp-progress-list');
     let vidPlayed = document.querySelector('.ytp-play-progress');
     let vidLoaded = document.querySelector('.ytp-load-progress');
-
     let vidId     = null;
+
     if (player) vidId = player.getVideoData()['video_id'];
 
     if (DICT[vidId] && player.getAdState() !== 1) {
@@ -70,57 +68,26 @@ function trim() {
       vidPlayed.style.background = playedBg.format(playedStart, playedEnd);
       vidLoaded.style.background = loadedBg.format(loadedStart, loadedEnd);
     }
-    else if (player) {
+    else if (player) hidePlayerUi();
+
+    function hidePlayerUi() {
       vidBar.style.background    = '';
       vidPlayed.style.background = '';
       vidLoaded.style.background = '';
     }
   }
 
+  // Listener for an element to load.
   function onElemLoad(selector, callback) {
     if (document.querySelector(selector)) callback();
-    else setTimeout(function() { onElemLoad(selector, callback) }, 100);
+    else setTimeout(() => { onElemLoad(selector, callback) }, 100);
   }
 
-  function widgetStep() {
-    let player = document.querySelector('#movie_player');
-    let vidId  = null;
-    if (player) vidId = player.getVideoData()['video_id'];
-
-    let inputStart = document.querySelector('#trim-start');
-    let inputEnd   = document.querySelector('#trim-end');
-    let trimElem   = document.querySelector('#trim-widget');
-    let statusElem = document.querySelector('#trim-status');
-    let container  = document.querySelector('#yt-masthead-content');
-    let searchBar  = document.querySelector('#masthead-search');
-
-    if (!vidId || !player.getDuration()) trimElem.style.visibility = 'hidden';
-    else {
-      if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) trimElem.style.visibility = 'hidden';
-      else trimElem.style.visibility = 'visible';
-
-      if (DICT[vidId]) {
-        inputStart.placeholder      = secToTime(DICT[vidId][0]);
-        inputEnd.placeholder        = secToTime(DICT[vidId][1]);
-        statusElem.style.background = '#2ecc71';
-      }
-      else {
-        inputStart.placeholder      = 'mm:ss';
-        inputEnd.placeholder        = 'mm:ss';
-        statusElem.style.background = '#888888';
-      }
-    }
-  }
-
-  function setWidgetUi() {
+  // Function which initialises the widget Ui.
+  function initWidget() {
     const CSS_OLD = //
       `
         #trim-widget {
-            float: right;
-            visibility: hidden;
-            width: auto;
-            height: 23px;
-            line-height: 23px;
             margin-top: -27px;
         }
 
@@ -140,11 +107,6 @@ function trim() {
     const CSS_NEW = //
       `
         #trim-widget {
-            float: right;
-            visibility: hidden;
-            width: auto;
-            height: 23px;
-            line-height: 23px;
             margin-top: 5px;
             margin-left: 5em;
         }
@@ -182,6 +144,8 @@ function trim() {
     }
 
     styleElem.innerHTML = addCss;
+    document.head.appendChild(styleElem);
+
     trimElem.id         = 'trim-widget';
     trimElem.innerHTML  = //
       `
@@ -196,10 +160,14 @@ function trim() {
         <div id="trim-box"></div>
       `
 
-    document.head.appendChild(styleElem);
-    container.append(trimElem);
+    setTimeout(function() {
+      container.append(trimElem);
+      initListeners();
+      setInterval(widgetStep, 125);
+    }, 125);
   }
 
+  // Function which initialises the listeners on widget elements.
   function initListeners() {
     let statusElem = document.querySelector('#trim-status');
     let formElem   = document.querySelector('#trim-form');
@@ -251,7 +219,7 @@ function trim() {
       if (startTime > player.getDuration()) startTime = player.getDuration();
       if (endTime > player.getDuration()) endTime = player.getDuration();
 
-      if (player.getVideoData['isLive']) showNotification(3);
+      if (player.getVideoData()['isLive']) showNotification(3);
       else if (startTime == -1 && endTime == -1) {
         showNotification(1);
         delete DICT[vidId];
@@ -267,6 +235,7 @@ function trim() {
       inputStart.value = '';
       inputEnd.value   = '';
 
+      // Function which sets the styles and displays notifications on trim-box.
       function showNotification(code) {
         let boxElem = document.querySelector('#trim-box');
         let boxBgrd = 'transparent';
@@ -275,6 +244,7 @@ function trim() {
         const saved   = '<i class="material-icons">done</i>&nbsp;&nbsp;Trim successfully saved!';
         const deleted = '<i class="material-icons">delete</i>&nbsp;&nbsp;Trim Successfully deleted!';
         const invalid = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Invalid input, please try again.';
+        const live    = '<i class="material-icons">report_problem</i>&nbsp;&nbsp;Unable to trim live videos.';
 
         if (code === 0) {
           boxBgrd = 'rgba(46, 213, 115, 0.85)';
@@ -306,6 +276,51 @@ function trim() {
     // Function which handles click event on trim-box.
     function hideBox(event) {
       document.querySelector('#trim-box').classList.remove('show-status', 'show-notification');
+    }
+  }
+
+  // Function which handles the widget Ui.
+  function widgetStep() {
+    let player = document.querySelector('#movie_player');
+    let vidId  = null;
+    if (player) vidId = player.getVideoData()['video_id'];
+
+    let inputStart = document.querySelector('#trim-start');
+    let inputEnd   = document.querySelector('#trim-end');
+    let trimElem   = document.querySelector('#trim-widget');
+    let statusElem = document.querySelector('#trim-status');
+    let boxElem    = document.querySelector('#trim-box');
+    let container  = document.querySelector('#yt-masthead-content');
+    let searchBar  = document.querySelector('#masthead-search');
+
+    if (!vidId || !player.getDuration()) hideWidget();
+    else {
+      if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) hideWidget();
+      else showWidget();
+
+      if (DICT[vidId]) {
+        inputStart.placeholder      = secToTime(DICT[vidId][0]);
+        inputEnd.placeholder        = secToTime(DICT[vidId][1]);
+        statusElem.style.background = '#2ecc71';
+      }
+      else {
+        inputStart.placeholder      = 'mm:ss';
+        inputEnd.placeholder        = 'mm:ss';
+        statusElem.style.background = '#888888';
+      }
+    }
+
+    function showWidget() {
+      trimElem.style.display       = '';
+      trimElem.style.visibility    = 'visible';
+      trimElem.style.opacity       = 1;
+      trimElem.style.pointerEvents = '';
+    }
+
+    function hideWidget() {
+      trimElem.style.opacity       = 0;
+      trimElem.style.pointerEvents = 'none';
+      boxElem.classList.remove('show-status', 'show-notification');
     }
   }
 }
