@@ -40,7 +40,7 @@ const GUI_STMT  = [[initListeners, FN_EXEC], [updateWidgetUi, FN_EXEC]];
 
 // Injects dependencies and main logic of script immediately.
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
   injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/string-format.js');
   injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/02a44f8e/utils/time-conversion.js');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }, false);
 
 // Injects GUI after header loads.
-onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', () => {
+onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', function() {
   setWidgetUi();
   injectCss(CSS_STR);
   injectJs(GUI_STMT);

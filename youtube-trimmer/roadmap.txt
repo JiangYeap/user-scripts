@@ -1,0 +1,18 @@
+YouTube Trimmer Roadmap
+  v1.3
+    - Add notification UI in tooltip.
+    - Add video player progression bar UI. (DONE) 
+    - Remove input values on confirm. (DONE)
+    - Better tooltip. (DONE)
+
+  v2.0
+    - Add compact icon UI.
+    - Add strictness options.
+    - Add show list and backup (with Google Drive API) option.
+    - Add adblocker.
+    - Add settings.
+    - Make it an extension.
+    - Add global YouTuber trim.
+
+  v3.0
+    - Add machine learning capabilities to automatically trim music.

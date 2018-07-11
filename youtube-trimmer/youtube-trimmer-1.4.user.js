@@ -19,7 +19,7 @@ function trim() {
   setInterval(trimStep, 125);
   setInterval(playerStep, 125);
 
-  onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', () => {
+  onElemLoad('#yt-masthead-content, ytd-searchbox.style-scope', function() {
     setWidgetUi();
     initListeners();
     setInterval(widgetStep, 125);
@@ -79,7 +79,7 @@ function trim() {
 
   function onElemLoad(selector, callback) {
     if (document.querySelector(selector)) callback();
-    else setTimeout(() => { onElemLoad(selector, callback) }, 100);
+    else setTimeout(function() { onElemLoad(selector, callback) }, 100);
   }
 
   function widgetStep() {
@@ -251,7 +251,8 @@ function trim() {
       if (startTime > player.getDuration()) startTime = player.getDuration();
       if (endTime > player.getDuration()) endTime = player.getDuration();
 
-      if (startTime == -1 && endTime == -1) {
+      if (player.getVideoData['isLive']) showNotification(3);
+      else if (startTime == -1 && endTime == -1) {
         showNotification(1);
         delete DICT[vidId];
         localStorage.setItem('dict', JSON.stringify(DICT));
@@ -287,6 +288,10 @@ function trim() {
           boxBgrd = 'rgba(253, 203, 110, 0.85)';
           boxHtml = invalid;
         }
+        else if (code === 3) {
+          boxBgrd = 'rgba(253, 203, 110, 0.85)';
+          boxHtml = live;
+        }
 
         boxElem.style.background = boxBgrd;
         boxElem.innerHTML        = boxHtml
@@ -307,7 +312,7 @@ function trim() {
 
 const MAIN_STMT = [[trim, FN_EXEC]];
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
   injectCssSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/youtube-trimmer/base.css');
   injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/e0b767da/utils/string-format.js');

@@ -50,7 +50,8 @@ function initListeners() {
     if (startTime > player.getDuration()) startTime = player.getDuration();
     if (endTime > player.getDuration()) endTime = player.getDuration();
 
-    if (startTime == -1 && endTime == -1) {
+    if (player.getVideoData['isLive']) showNotification(3);
+    else if (startTime == -1 && endTime == -1) {
       showNotification(1);
       delete DICT[vidId];
       localStorage.setItem('dict', JSON.stringify(DICT));
@@ -85,6 +86,10 @@ function initListeners() {
       else if (code === 2) {
         boxBgrd = 'rgba(253, 203, 110, 0.85)';
         boxHtml = invalid;
+      }
+      else if (code === 3) {
+        boxBgrd = 'rgba(253, 203, 110, 0.85)';
+        boxHtml = live;
       }
 
       boxElem.style.background = boxBgrd;
