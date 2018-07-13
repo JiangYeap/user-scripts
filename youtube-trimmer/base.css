@@ -59,6 +59,7 @@
     text-align: center;
     height: 100%;
     width: 3em;
+    color: inherit;
 }
 
 .trim-input:not(:focus):invalid {
