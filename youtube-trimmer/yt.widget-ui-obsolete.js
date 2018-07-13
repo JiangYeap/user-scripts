@@ -169,9 +169,9 @@ function setWidgetUi() {
       <span id="trim-status" class="tooltip-bottom"></span>
       <form id="trim-form">
           <label for="trim-start" class="trim-label">Start: </label>
-          <input id="trim-start" class="trim-input" type="text" autocomplete="off" required="required" />
+          <input id="trim-start" class="trim-input" type="text" style="color: var(--yt-searchbox-text-color)" autocomplete="off" required="required" />
           <label for="trim-end" class="trim-label">End: </label>
-          <input id="trim-end" class="trim-input" type="text" autocomplete="off" required="required" />
+          <input id="trim-end" class="trim-input" type="text" style="color: var(--yt-searchbox-text-color)" autocomplete="off" required="required" />
           <button id="trim-button" type="submit">Confirm</button>
       </form>
       <div id="trim-box"></div>
