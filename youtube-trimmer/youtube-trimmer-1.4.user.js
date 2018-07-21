@@ -38,7 +38,7 @@ function trim() {
       let endTime     = DICT[vidId][1];
 
       if (Math.floor(currentTime) < startTime) player.seekTo(startTime);
-      if (Math.floor(currentTime) >= endTime && currentTime != vidLength) player.seekTo(vidLength);
+      if (Math.floor(currentTime) >= endTime && Math.ceil(currentTime) < vidLength) player.seekTo(vidLength);
     }
   }
 
@@ -222,8 +222,8 @@ function trim() {
       let vidTitle   = (document.querySelector('.title > yt-formatted-string:nth-child(1)')
                      || document.querySelector('#eow-title')).innerHTML.trim();
 
-      if (startTime > player.vidLength) startTime = vidLength;
-      if (endTime > player.vidLength) endTime = vidLength;
+      if (startTime > vidLength) startTime = vidLength;
+      if (endTime > vidLength) endTime = vidLength;
 
       if (player.getVideoData()['isLive']) showNotification(3);
       else if (startTime == -1 && endTime == -1) {
@@ -334,6 +334,52 @@ function trim() {
       boxElem.classList.remove('show-status', 'show-notification');
     }
   }
+
+  // Auxiliary function which replaces parts of String with formatted data.
+  String.prototype.format = function() {
+    let args = arguments;
+    return this.replace(/{(\d+)}/g, (match, number) => (
+      typeof args[number] != 'undefined' ? args[number] : match
+    ));
+  }
+
+  // Auxiliary function which converts input hh:mm:ss formatted time to seconds.
+  function timeToSec(time) {
+    let seconds = NaN;
+    let timeSeg = time.split(':').reverse();
+    let numSeg  = timeSeg.length;
+
+    if (numSeg > 3) return NaN;
+    for (let i = 0; i < numSeg; i ++) {
+      let number = parseInt(timeSeg[i]);
+
+      if (numSeg === 1) seconds = number;
+      else {
+        if (i === 0 && number < 60) seconds = number;
+        else if (i === 1 && number < 60) seconds += number * 60;
+        else if (i === 2) seconds += number * 3600;
+      }
+    }
+    return seconds;
+  }
+
+  // Auxiliary function which converts input in seconds to hh:mm:ss format.
+  function secToTime(seconds) {
+    let time = null;
+    let hour = 0 | seconds / 3600;
+    seconds -= hour * 3600;
+
+    let min  = 0 | seconds / 60;
+    let sec  = 0 | seconds % 60;
+
+    if (String(sec).length < 2) sec = '0' + sec;
+    if (hour) {
+      if (String(min).length < 2) min = '0' + min;
+      time = hour + ':' + min + ':' + sec;
+    }
+    else time = min + ':' + sec;
+    return time;
+  }
 }
 
 const MAIN_STMT = [[trim, FN_EXEC]];
@@ -341,7 +387,5 @@ const MAIN_STMT = [[trim, FN_EXEC]];
 document.addEventListener('DOMContentLoaded', function() {
   injectCssSrc('https://fonts.googleapis.com/icon?family=Material+Icons');
   injectCssSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/738b2607/youtube-trimmer/base.css');
-  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/738b2607/utils/string-format.js');
-  injectJsSrc('https://cdn.rawgit.com/JiangYeap/user-scripts/738b2607/utils/time-conversion.js');
   injectJs(MAIN_STMT);
 }, false);
