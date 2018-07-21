@@ -29,7 +29,7 @@ function trim() {
 
     if (player) {
       vidId     = player.getVideoData()['video_id'];
-      vidLength = player.getDuration();
+      vidLength = player.getProgressState()['seekableEnd'];
     }
 
     if (DICT[vidId] && vidLength) {
@@ -80,12 +80,6 @@ function trim() {
       vidPlayed.style.background = '';
       vidLoaded.style.background = '';
     }
-  }
-
-  // Listener for an element to load.
-  function onElemLoad(selector, callback) {
-    if (document.querySelector(selector)) callback();
-    else setTimeout(() => { onElemLoad(selector, callback) }, 100);
   }
 
   // Function which initialises the widget Ui.
@@ -333,6 +327,12 @@ function trim() {
       trimElem.style.pointerEvents = 'none';
       boxElem.classList.remove('show-status', 'show-notification');
     }
+  }
+
+  // Auxiliary function which listens for an element to load before executing callback.
+  function onElemLoad(selector, callback) {
+    if (document.querySelector(selector)) callback();
+    else setTimeout(() => { onElemLoad(selector, callback) }, 100);
   }
 
   // Auxiliary function which replaces parts of String with formatted data.
