@@ -23,17 +23,22 @@ function trim() {
 
   // Function which handles the trim logic.
   function trimStep() {
-    let player = document.querySelector('#movie_player');
-    let vidId  = null;
-    if (player) vidId = player.getVideoData()['video_id'];
+    let player    = document.querySelector('#movie_player');
+    let vidId     = null;
+    let vidLength = NaN;
 
-    if (DICT[vidId] && player.getDuration()) {
+    if (player) {
+      vidId     = player.getVideoData()['video_id'];
+      vidLength = player.getDuration();
+    }
+
+    if (DICT[vidId] && vidLength) {
       let currentTime = player.getCurrentTime();
       let startTime   = DICT[vidId][0];
       let endTime     = DICT[vidId][1];
 
       if (Math.floor(currentTime) < startTime) player.seekTo(startTime);
-      if (Math.floor(currentTime) >= endTime) player.seekTo(player.getDuration());
+      if (Math.floor(currentTime) >= endTime && currentTime != vidLength) player.seekTo(vidLength);
     }
   }
 
@@ -209,6 +214,7 @@ function trim() {
 
       let player     = document.querySelector('#movie_player');
       let vidId      = player.getVideoData()['video_id'];
+      let vidLength  = player.getDuration();
       let inputStart = document.querySelector('#trim-start');
       let inputEnd   = document.querySelector('#trim-end');
       let startTime  = timeToSec(inputStart.value);
@@ -216,8 +222,8 @@ function trim() {
       let vidTitle   = (document.querySelector('.title > yt-formatted-string:nth-child(1)')
                      || document.querySelector('#eow-title')).innerHTML.trim();
 
-      if (startTime > player.getDuration()) startTime = player.getDuration();
-      if (endTime > player.getDuration()) endTime = player.getDuration();
+      if (startTime > player.vidLength) startTime = vidLength;
+      if (endTime > player.vidLength) endTime = vidLength;
 
       if (player.getVideoData()['isLive']) showNotification(3);
       else if (startTime == -1 && endTime == -1) {
@@ -281,9 +287,14 @@ function trim() {
 
   // Function which handles the widget Ui.
   function widgetStep() {
-    let player = document.querySelector('#movie_player');
-    let vidId  = null;
-    if (player) vidId = player.getVideoData()['video_id'];
+    let player    = document.querySelector('#movie_player');
+    let vidId     = null;
+    let vidLength = NaN;
+
+    if (player) {
+      vidId     = player.getVideoData()['video_id'];
+      vidLength = player.getDuration();
+    }
 
     let inputStart = document.querySelector('#trim-start');
     let inputEnd   = document.querySelector('#trim-end');
@@ -293,7 +304,7 @@ function trim() {
     let container  = document.querySelector('#yt-masthead-content');
     let searchBar  = document.querySelector('#masthead-search');
 
-    if (!vidId || !player.getDuration()) hideWidget();
+    if (!vidId || !vidLength) hideWidget();
     else {
       if (container && searchBar && container.offsetWidth - searchBar.offsetWidth < trimElem.offsetWidth) hideWidget();
       else showWidget();
